@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart - Financial Professionals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+
+    <script>
+        (function () {
+            // Initialize googletag if not already defined
+            window.googletag = window.googletag || { cmd: [] };
+
+            // Ad slot variables
+            let adSlot1, adSlot2, anchorSlot;
+            const refreshInterval = 30000; // 30 seconds - more user-friendly refresh rate
+            let refreshTimer;
+
+            // Function to set up ads
+            function setupAds() {
+                googletag.cmd.push(function () {
+                    // Setup PubAds
+                    const pubads = googletag.pubads();
+                    pubads.enableSingleRequest();
+                    pubads.setCentering(true);
+
+                    // Apply geotargeting if available
+                    if (window.geoTarget) {
+                        pubads.setLocation(window.geoTarget);
+                    }
+
+                    // Define Ad Slots with consistent IDs
+                    adSlot1 = googletag.defineSlot(
+                        '/23300646440/Native',
+                        [[300, 250], [320, 480], [250, 250], [300, 100], 'fluid', [336, 280]],
+                        'ad-slot-1'
+                    ).addService(pubads);
+
+                    adSlot2 = googletag.defineSlot(
+                        '/23300646440/Native',
+                        [[300, 250], [320, 480], [250, 250], [300, 100], 'fluid', [336, 280]],
+                        'ad-slot-2'
+                    ).addService(pubads);
+
+                    // Define anchor ad with proper ID
+                    anchorSlot = googletag.defineOutOfPageSlot(
+                        '/23300646440/Native',
+                        googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR
+                    );
+
+                    if (anchorSlot) {
+                        anchorSlot.addService(pubads);
+                        // Use the correct ID for the anchor ad
+                        anchorSlot.setElementId('ad-anchor-slot');
+                    }
+
+                    // Event listeners for ad loading
+                    pubads.addEventListener('slotRenderEnded', function (event) {
+                        // Handle ad render events if needed
+                        const slotId = event.slot.getSlotElementId();
+                        const isEmpty = event.isEmpty;
+
+                        // Example: hide containers with no ads
+                        if (isEmpty && document.getElementById(slotId)) {
+                            document.getElementById(slotId).style.display = 'none';
+                        }
+                    });
+
+                    // Enable services
+                    googletag.enableServices();
+
+                    // Display ads
+                    try {
+                        if (document.getElementById('ad-slot-1')) {
+                            googletag.display('ad-slot-1');
+                        }
+                        if (document.getElementById('ad-slot-2')) {
+                            googletag.display('ad-slot-2');
+                        }
+                        if (document.getElementById('ad-anchor-slot')) {
+                            googletag.display('ad-anchor-slot');
+                        }
+                    } catch (error) {
+                        console.log('Error displaying ads:', error);
+                    }
+
+                    // Set up periodic refresh with error handling
+                    setupAdRefresh();
+                });
+            }
+
+            // Function to handle ad refresh
+            function setupAdRefresh() {
+                if (refreshTimer) {
+                    clearInterval(refreshTimer);
+                }
+
+                refreshTimer = setInterval(function () {
+                    try {
+                        // Only refresh if slots exist and are defined
+                        const slotsToRefresh = [];
+                        if (adSlot1) slotsToRefresh.push(adSlot1);
+                        if (adSlot2) slotsToRefresh.push(adSlot2);
+
+                        if (slotsToRefresh.length > 0) {
+                            googletag.cmd.push(function () {
+                                googletag.pubads().refresh(slotsToRefresh);
+                            });
+                        }
+                    } catch (error) {
+                        console.log('Error refreshing ads:', error);
+                        clearInterval(refreshTimer); // Stop trying on persistent errors
+                    }
+                }, refreshInterval);
+            }
+
+            // Check for ad blockers (simple detection)
+            function checkAdBlocker() {
+                const testAd = document.createElement('div');
+                testAd.innerHTML = '&nbsp;';
+                testAd.className = 'adsbox';
+                document.body.appendChild(testAd);
+
+                setTimeout(function () {
+                    if (testAd.offsetHeight === 0) {
+                        console.log('Ad blocker detected');
+                        // You can show a message to users or implement fallback content
+                    }
+                    document.body.removeChild(testAd);
+                }, 100);
+            }
+
+            // Initialize ads when DOM is ready
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                setupAds();
+                checkAdBlocker();
+            } else {
+                document.addEventListener('DOMContentLoaded', function () {
+                    setupAds();
+                    checkAdBlocker();
+                });
+            }
+
+            // Clean up on page unload
+            window.addEventListener('beforeunload', function () {
+                if (refreshTimer) {
+                    clearInterval(refreshTimer);
+                }
+            });
+        })();
+
+    </script>
+
+
+    <style>
+        #banner-ad {
+            width: 100%;
+            max-width: 425px;
+            margin: 1rem auto 0.5rem;
+            padding: 0.5rem;
+            background: hsl(240, 6%, 97%);
+            box-shadow: 0 4px 15px var(--shadow-dark);
+            border-radius: 8px;
+            position: relative;
+            text-align: center;
+            border: 1px solid var(--accent-gold);
+        }
+
+        #banner-ad::before {
+            content: "Advertisement";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--accent-gold);
+            background: var(--primary-dark);
+            padding: 0 8px;
+            border-radius: 4px;
+            border: 1px solid var(--accent-gold);
+        }
+
+        .ad-divider {
+            width: 90%;
+            max-width: 425px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 0.5rem auto;
+        }
+    </style>
+
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            box-shadow: 0 4px 6px rgba(255, 138, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(255, 138, 0, 0.4);
+        }
+
+        .finance-card {
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .finance-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .expandable-content.expanded {
+            max-height: 1000px;
+        }
+
+        .market-ticker {
+            background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+            color: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .ticker-item {
+            animation: ticker-scroll 20s linear infinite;
+            white-space: nowrap;
+            display: inline-block;
+            padding-right: 50px;
+        }
+
+        @keyframes ticker-scroll {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .world-map-bg {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSI+PHBhdGggc3Ryb2tlPSIjZmZlNWNjIiBzdHJva2Utd2lkdGg9IjAuNSIgZD0iTTEwIDE4LjVhMTAgMTAgMCAxIDAgMC0xNyAxMCAxMCAwIDAgMCAwIDE3eiIvPjxwYXRoIHNyb2tlPSIjZmZlNWNjIiBzdHJva2Utd2lkdGg9IjAuNSIgZD0iTTIgMTBoMTZNNy41IDJ2MTZNMTIuNSAyLjV2MTVNMi41IDdIMTdNMi41IDEzaDE1Ii8+PC9zdmc+');
+            background-repeat: repeat;
+            background-size: 100px;
+            opacity: 0.1;
+        }
+
+        .finance-icon {
+            background-color: #ffedd5;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .world-map-bg {
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        .world-map-bg::before {
+            content: "" !important;
+            position: absolute !important;
+            inset: 0 !important;
+            background: url('map.png') no-repeat center/cover !important;
+            /* your map image */
+            opacity: 0.2 !important;
+            /* 🔹 light faded map */
+            filter: none !important;
+            /* 🔹 force remove blur */
+            z-index: 0 !important;
+        }
+
+        .world-map-bg * {
+            position: relative !important;
+            z-index: 1 !important;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-orange-50 to-amber-100 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-white rounded-2xl ">
+        <!-- Financial Professionals Page -->
+        <div>
+            <header class="bg-orange-500 text-white p-5 flex items-center">
+                <a href="index.html" class="text-white mr-3">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <h2 class="text-xl font-bold">Financial Professionals</h2>
+            </header>
+
+            <!-- Header Section -->
+
+            <!-- Header Section -->
+            <div
+                class="bg-gradient-to-r from-orange-400 to-orange-500 text-white p-5 text-center relative world-map-bg">
+                <h1 class="text-2xl font-bold mb-3 relative z-10">Global Financial Intelligence</h1>
+                <p class="text-orange-100 mb-4 relative z-10">
+                    Expert insights, international banking data, and trading intelligence for financial professionals.
+                </p>
+
+                <!-- Navigation buttons -->
+                <div class="grid grid-cols-2 gap-3 mt-4 relative z-10">
+                    <a href="#international-banking" class="block">
+                        <button
+                            class="bg-white text-orange-600 hover:bg-orange-50 w-full py-3 rounded-lg font-bold shadow-md">
+                            <i class="fas fa-globe mr-2"></i> Global Banking
+                        </button>
+                    </a>
+                    <a href="#trading-markets" class="block">
+                        <button
+                            class="bg-white text-orange-600 hover:bg-orange-50 w-full py-3 rounded-lg font-bold shadow-md">
+                            <i class="fas fa-chart-line mr-2"></i> Trading
+                        </button>
+                    </a>
+                    <a href="#financial-tools" class="block col-span-2">
+                        <button
+                            class="bg-orange-700 text-white hover:bg-orange-800 w-full py-3 rounded-lg font-bold shadow-md">
+                            <i class="fas fa-tools mr-2"></i> Professional Tools
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- Market Ticker -->
+            <div class="market-ticker p-3 text-sm overflow-hidden">
+                <div class="ticker-item">
+                    DOW: 34,500.21 (+0.85%) | S&P: 4,450.67 (+0.72%) | NASDAQ: 13,710.33 (+1.12%) |
+                    EUR/USD: 1.0924 (+0.3%) | GBP/USD: 1.2745 (-0.2%) | USD/JPY: 141.23 (+0.4%) |
+                    Gold: $1,945.20 (-0.2%) | Oil: $78.45 (+1.1%) | Bitcoin: $29,450.50 (+2.3%)
+                </div>
+            </div>
+
+            <!-- ads -->
+            <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                <div id="ad-slot-1" class="ad-container" style="display: block !important;"></div>
+            </div>
+
+            <main class="p-5">
+                <!-- International Banking Card -->
+                <div id="international-banking" class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">International Banking</h3>
+                    <p class="text-gray-700 mb-3">Global financial systems, cross-border transactions, and regulatory
+                        frameworks.</p>
+                    <div class="expandable-content" id="banking-content">
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Major Financial Centers:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">New York - World's largest financial market</li>
+                                <li class="mb-1">London - Leading international banking center</li>
+                                <li class="mb-1">Tokyo - Major Asian financial hub</li>
+                                <li class="mb-1">Hong Kong - Gateway to Chinese markets</li>
+                                <li class="mb-1">Singapore - Asia's wealth management center</li>
+                                <li>Frankfurt - European Central Bank headquarters</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">International Payment Systems:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">SWIFT - Society for Worldwide Interbank Financial Telecommunication
+                                </li>
+                                <li class="mb-1">CHIPS - Clearing House Interbank Payments System</li>
+                                <li class="mb-1">Fedwire - Federal Reserve's wire transfer service</li>
+                                <li class="mb-1">SEPA - Single Euro Payments Area</li>
+                                <li>Cross-border ACH - Automated Clearing House for international transfers</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg">
+                            <h4 class="font-bold mb-2">Global Regulatory Bodies:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">BIS - Bank for International Settlements</li>
+                                <li class="mb-1">IMF - International Monetary Fund</li>
+                                <li class="mb-1">FSB - Financial Stability Board</li>
+                                <li class="mb-1">Basel Committee on Banking Supervision</li>
+                                <li>IOSCO - International Organization of Securities Commissions</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="toggleExpand('banking-content')">
+                        Learn More
+                    </button>
+                </div>
+
+                <!-- Trading & Markets Card -->
+                <div id="trading-markets" class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Trading & Markets</h3>
+                    <p class="text-gray-700 mb-3">Global markets, trading strategies, and investment analysis.</p>
+                    <div class="expandable-content" id="trading-content">
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Major Global Exchanges:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">NYSE - New York Stock Exchange</li>
+                                <li class="mb-1">NASDAQ - Electronic exchange for tech stocks</li>
+                                <li class="mb-1">LSE - London Stock Exchange</li>
+                                <li class="mb-1">TSE - Tokyo Stock Exchange</li>
+                                <li class="mb-1">SSE - Shanghai Stock Exchange</li>
+                                <li>EURONEXT - Pan-European exchange</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Trading Strategies:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Swing Trading - Capturing short-to-medium term gains</li>
+                                <li class="mb-1">Day Trading - Opening and closing positions within same day</li>
+                                <li class="mb-1">Position Trading - Long-term strategy based on fundamentals</li>
+                                <li class="mb-1">Algorithmic Trading - Using computer programs for execution</li>
+                                <li>Arbitrage - Exploiting price differences across markets</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg">
+                            <h4 class="font-bold mb-2">Market Analysis Techniques:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Technical Analysis - Studying price charts and patterns</li>
+                                <li class="mb-1">Fundamental Analysis - Evaluating company financials</li>
+                                <li class="mb-1">Quantitative Analysis - Using mathematical models</li>
+                                <li class="mb-1">Sentiment Analysis - Measuring market psychology</li>
+                                <li>Macro Analysis - Studying economic indicators</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="toggleExpand('trading-content')">
+                        Learn More
+                    </button>
+                </div>
+
+                <!-- Financial Tools Card -->
+                <div id="financial-tools" class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Professional Tools</h3>
+                    <p class="text-gray-700 mb-3">Advanced financial tools and resources for professionals.</p>
+
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <a href="forex.html" class="block">
+                            <div class="bg-orange-100 p-4 rounded-lg text-center hover:bg-orange-200">
+                                <i class="fas fa-exchange-alt text-orange-600 text-2xl mb-2"></i>
+                                <p class="text-sm font-medium">Forex Tools</p>
+                            </div>
+                        </a>
+                        <a href="analysis.html" class="block">
+                            <div class="bg-orange-100 p-4 rounded-lg text-center hover:bg-orange-200">
+                                <i class="fas fa-chart-bar text-orange-600 text-2xl mb-2"></i>
+                                <p class="text-sm font-medium">Market Analysis</p>
+                            </div>
+                        </a>
+                        <a href="risk.html" class="block">
+                            <div class="bg-orange-100 p-4 rounded-lg text-center hover:bg-orange-200">
+                                <i class="fas fa-shield-alt text-orange-600 text-2xl mb-2"></i>
+                                <p class="text-sm font-medium">Risk Management</p>
+                            </div>
+                        </a>
+                        <a href="compliance.html" class="block">
+                            <div class="bg-orange-100 p-4 rounded-lg text-center hover:bg-orange-200">
+                                <i class="fas fa-balance-scale text-orange-600 text-2xl mb-2"></i>
+                                <p class="text-sm font-medium">Compliance</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="expandable-content" id="tools-content">
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Financial Software Platforms:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Bloomberg Terminal - Professional market data system</li>
+                                <li class="mb-1">Reuters Eikon - Financial analysis platform</li>
+                                <li class="mb-1">FactSet - Integrated financial information</li>
+                                <li class="mb-1">Morningstar Direct - Investment analysis suite</li>
+                                <li>MATLAB - Quantitative analysis and modeling</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg">
+                            <h4 class="font-bold mb-2">Professional Certifications:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">CFA - Chartered Financial Analyst</li>
+                                <li class="mb-1">FRM - Financial Risk Manager</li>
+                                <li class="mb-1">CAIA - Chartered Alternative Investment Analyst</li>
+                                <li class="mb-1">CFP - Certified Financial Planner</li>
+                                <li>CPA - Certified Public Accountant</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="toggleExpand('tools-content')">
+                        Learn More
+                    </button>
+                </div>
+
+                <!-- ads -->
+                <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                    <div id="ad-slot-2" class="ad-container" style="display: block !important;"></div>
+                </div>
+
+                <!-- Global Economy Card -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Global Economic Indicators</h3>
+                    <p class="text-gray-700 mb-3">Key economic data and indicators that move financial markets.</p>
+                    <div class="expandable-content" id="economy-content">
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Major Economic Indicators:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">GDP Growth Rates - Measure of economic expansion</li>
+                                <li class="mb-1">Inflation Rates (CPI, PPI) - Price level changes</li>
+                                <li class="mb-1">Employment Data - Unemployment rates, job creation</li>
+                                <li class="mb-1">Central Bank Interest Rates - Monetary policy tool</li>
+                                <li>Consumer Confidence - Measure of economic optimism</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Key Reports to Watch:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">US Non-Farm Payrolls - Monthly employment report</li>
+                                <li class="mb-1">FOMC Statements - Federal Reserve policy decisions</li>
+                                <li class="mb-1">ECB Policy Announcements - European Central Bank</li>
+                                <li class="mb-1">GDP Reports - Quarterly economic growth data</li>
+                                <li>CPI Releases - Consumer Price Index inflation data</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg">
+                            <h4 class="font-bold mb-2">Economic Calendars:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Forex Factory - Currency market economic calendar</li>
+                                <li class="mb-1">Investing.com - Comprehensive economic calendar</li>
+                                <li class="mb-1">Bloomberg Economic Calendar - Professional-grade</li>
+                                <li class="mb-1">DailyFX - Forex-focused economic events</li>
+                                <li>FXStreet - Real-time economic calendar</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="toggleExpand('economy-content')">
+                        Learn More
+                    </button>
+                </div>
+
+                <!-- Financial Institutions -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Global Financial Institutions</h3>
+                    <p class="text-gray-700 mb-3">Key organizations that shape the international financial system.</p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center p-3 bg-orange-50 rounded-lg">
+                            <div class="finance-icon">
+                                <i class="fas fa-landmark text-orange-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">International Monetary Fund (IMF)</h4>
+                                <p class="text-sm text-gray-600">Promotes global monetary cooperation</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center p-3 bg-orange-50 rounded-lg">
+                            <div class="finance-icon">
+                                <i class="fas fa-university text-orange-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">World Bank</h4>
+                                <p class="text-sm text-gray-600">Provides loans to developing countries</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center p-3 bg-orange-50 rounded-lg">
+                            <div class="finance-icon">
+                                <i class="fas fa-balance-scale-left text-orange-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Bank for International Settlements (BIS)</h4>
+                                <p class="text-sm text-gray-600">Central bank for central banks</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center p-3 bg-orange-50 rounded-lg">
+                            <div class="finance-icon">
+                                <i class="fas fa-handshake text-orange-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Financial Stability Board (FSB)</h4>
+                                <p class="text-sm text-gray-600">Monitors global financial system</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Financial Professional FAQs</h3>
+                    <p class="text-gray-700 mb-3">Common questions from finance professionals.</p>
+                    <div class="expandable-content" id="faq-content">
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Q: What are the best resources for staying updated on global
+                                financial regulations?</h4>
+                            <p class="text-sm">A: Key resources include the Financial Times, Wall Street Journal,
+                                Bloomberg, Reuters, and official publications from regulatory bodies like the SEC, FCA,
+                                ESMA, and IOSCO. Many professionals also use specialized services like Thomson Reuters
+                                Regulatory Intelligence.</p>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Q: How has technology changed international banking and trading?
+                            </h4>
+                            <p class="text-sm">A: Technology has revolutionized finance through algorithmic trading,
+                                blockchain for settlements, AI for risk assessment, API integrations for banking
+                                systems, and real-time global payment networks. These advancements have increased speed,
+                                reduced costs, but also introduced new cybersecurity challenges.</p>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Q: What are the emerging trends in global finance?</h4>
+                            <p class="text-sm">A: Current trends include sustainable finance (ESG investing), digital
+                                assets and CBDCs, embedded finance, AI-driven analytics, open banking APIs, regtech for
+                                compliance, and the continued growth of Asian financial markets particularly in China
+                                and Southeast Asia.</p>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg">
+                            <h4 class="font-bold mb-2">Q: How do professionals manage currency risk in international
+                                investments?</h4>
+                            <p class="text-sm">A: Currency risk is managed through hedging strategies using forward
+                                contracts, options, currency swaps, ETFs that hedge forex exposure, natural hedging
+                                (matching assets and liabilities in same currency), and diversification across
+                                currencies and regions.</p>
+                        </div>
+                    </div>
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="toggleExpand('faq-content')">
+                        View All FAQs
+                    </button>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Professional Support</h3>
+                    <p class="text-gray-700 mb-3">Connect with our team of financial experts for specialized assistance.
+                    </p>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <div class="bg-orange-100 p-3 rounded-full mr-3">
+                                <i class="fas fa-phone text-orange-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Professional Support Line</p>
+                                <p class="text-orange-600">1-800-FIN-PRO</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="bg-orange-100 p-3 rounded-full mr-3">
+                                <i class="fas fa-envelope text-orange-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Institutional Email</p>
+                                <p class="text-orange-600">institutions@finsmart.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="bg-orange-100 p-3 rounded-full mr-3">
+                                <i class="fas fa-clock text-orange-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Global Support Hours</p>
+                                <p>24/5 (Follows global market hours)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Motivational closing line -->
+                <div class="text-center py-6">
+                    <p class="text-orange-600 font-semibold italic">Navigate global markets with confidence - your
+                        expertise shapes the financial landscape of tomorrow!</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Expandable content
+        function toggleExpand(contentId) {
+            const content = document.getElementById(contentId);
+            content.classList.toggle('expanded');
+
+            // If it's a button with "Learn More" text, change it to "Show Less"
+            const event = window.event;
+            if (event && event.target && event.target.tagName === 'BUTTON') {
+                if (content.classList.contains('expanded')) {
+                    if (contentId === 'faq-content') {
+                        event.target.textContent = 'Show Less FAQs';
+                    } else {
+                        event.target.textContent = 'Show Less';
+                    }
+                } else {
+                    if (contentId === 'faq-content') {
+                        event.target.textContent = 'View All FAQs';
+                    } else {
+                        event.target.textContent = 'Learn More';
+                    }
+                }
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function () {
+            // Simulate market data updates
+            setInterval(() => {
+                const changes = ['+0.85%', '+0.72%', '+1.12%', '+0.3%', '-0.2%', '+0.4%', '-0.2%', '+1.1%', '+2.3%'];
+                const randomChange = changes[Math.floor(Math.random() * changes.length)];
+
+                // Update one random market figure
+                const ticker = document.querySelector('.ticker-item');
+                const newTicker = ticker.innerHTML.replace(/\(([^)]+)\)/, `(${randomChange})`);
+                ticker.innerHTML = newTicker;
+            }, 1000);
+        });
+    </script>
+
+
+
+   <!-- ads  -->
+    <div id="ad-anchor-slot"></div>
+
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            alert('Right-click is disabled to protect our content.');
+        });
+
+        // Disable keyboard shortcuts
+        document.onkeydown = function (e) {
+            if (
+                (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c' || e.key === 'i' || e.key === 'j')) ||
+                e.key === 'F12' ||
+                (e.metaKey && e.altKey && e.key === 'i')
+            ) {
+                e.preventDefault();
+                alert('Access to developer tools and source code is disabled to protect our content.');
+                return false;
+            }
+            return true;
+        };
+
+        // Disable text selection
+        document.addEventListener('selectstart', function (e) {
+            e.preventDefault();
+        });
+
+        // Disable drag and drop
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+    </script>
+
+    <script>
+        window.googletag = window.googletag || { cmd: [] };
+        var anchorSlot;
+        googletag.cmd.push(function () {
+            anchorSlot = googletag.defineOutOfPageSlot('/23300646440/Anchortechgrowup', googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR);
+            if (anchorSlot) {
+                anchorSlot.addService(googletag.pubads());
+            }
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+ 
+    <script>
+        (function () {
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("DOM fully loaded.");
+
+                function showRewardedAd() {
+                    if (!window.googletag || !googletag.cmd) {
+                        console.error("Google Ad Manager is not properly initialized.");
+                        return;
+                    }
+                    // reward ads
+                    googletag.cmd.push(function () {
+                        try {
+                            const rewardedSlot = googletag
+                                .defineOutOfPageSlot('/23293093930/Interstitialrewarded', googletag.enums.OutOfPageFormat.REWARDED)
+                                .addService(googletag.pubads());
+
+                            googletag.enableServices();
+                            googletag.display(rewardedSlot);
+                            console.log("Attempting to display rewarded ad...");
+
+                            googletag.pubads().addEventListener("rewardedSlotReady", function (evt) {
+                                console.log("Rewarded ad ready.");
+                                evt.makeRewardedVisible();
+                            });
+
+                            googletag.pubads().addEventListener("rewardedSlotClosed", function () {
+                                console.log("Ad closed.");
+                                googletag.destroySlots([rewardedSlot]);
+                            });
+                        } catch (error) {
+                            console.error("Error during ad setup:", error);
+                        }
+                    });
+                }
+
+                // Add 2-second delay before showing the rewarded ad
+                setTimeout(function () {
+                    console.log("2 seconds elapsed, showing rewarded ad...");
+                    showRewardedAd();
+                }, 2000); // 2000 milliseconds = 2 seconds
+            });
+        })();
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart - Adult Financial Guidance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+
+    <script>
+        (function () {
+            // Initialize googletag if not already defined
+            window.googletag = window.googletag || { cmd: [] };
+
+            // Ad slot variables
+            let adSlot1, adSlot2, anchorSlot;
+            const refreshInterval = 30000; // 30 seconds - more user-friendly refresh rate
+            let refreshTimer;
+
+            // Function to set up ads
+            function setupAds() {
+                googletag.cmd.push(function () {
+                    // Setup PubAds
+                    const pubads = googletag.pubads();
+                    pubads.enableSingleRequest();
+                    pubads.setCentering(true);
+
+                    // Apply geotargeting if available
+                    if (window.geoTarget) {
+                        pubads.setLocation(window.geoTarget);
+                    }
+
+                    // Define Ad Slots with consistent IDs
+                    adSlot1 = googletag.defineSlot(
+                        '/23300646440/Native',
+                        [[300, 250], [320, 480], [250, 250], [300, 100], 'fluid', [336, 280]],
+                        'ad-slot-1'
+                    ).addService(pubads);
+
+                    adSlot2 = googletag.defineSlot(
+                        '/23300646440/Native',
+                        [[300, 250], [320, 480], [250, 250], [300, 100], 'fluid', [336, 280]],
+                        'ad-slot-2'
+                    ).addService(pubads);
+
+                    // Define anchor ad with proper ID
+                    anchorSlot = googletag.defineOutOfPageSlot(
+                        '/23300646440/Native',
+                        googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR
+                    );
+
+                    if (anchorSlot) {
+                        anchorSlot.addService(pubads);
+                        // Use the correct ID for the anchor ad
+                        anchorSlot.setElementId('ad-anchor-slot');
+                    }
+
+                    // Event listeners for ad loading
+                    pubads.addEventListener('slotRenderEnded', function (event) {
+                        // Handle ad render events if needed
+                        const slotId = event.slot.getSlotElementId();
+                        const isEmpty = event.isEmpty;
+
+                        // Example: hide containers with no ads
+                        if (isEmpty && document.getElementById(slotId)) {
+                            document.getElementById(slotId).style.display = 'none';
+                        }
+                    });
+
+                    // Enable services
+                    googletag.enableServices();
+
+                    // Display ads
+                    try {
+                        if (document.getElementById('ad-slot-1')) {
+                            googletag.display('ad-slot-1');
+                        }
+                        if (document.getElementById('ad-slot-2')) {
+                            googletag.display('ad-slot-2');
+                        }
+                        if (document.getElementById('ad-anchor-slot')) {
+                            googletag.display('ad-anchor-slot');
+                        }
+                    } catch (error) {
+                        console.log('Error displaying ads:', error);
+                    }
+
+                    // Set up periodic refresh with error handling
+                    setupAdRefresh();
+                });
+            }
+
+            // Function to handle ad refresh
+            function setupAdRefresh() {
+                if (refreshTimer) {
+                    clearInterval(refreshTimer);
+                }
+
+                refreshTimer = setInterval(function () {
+                    try {
+                        // Only refresh if slots exist and are defined
+                        const slotsToRefresh = [];
+                        if (adSlot1) slotsToRefresh.push(adSlot1);
+                        if (adSlot2) slotsToRefresh.push(adSlot2);
+
+                        if (slotsToRefresh.length > 0) {
+                            googletag.cmd.push(function () {
+                                googletag.pubads().refresh(slotsToRefresh);
+                            });
+                        }
+                    } catch (error) {
+                        console.log('Error refreshing ads:', error);
+                        clearInterval(refreshTimer); // Stop trying on persistent errors
+                    }
+                }, refreshInterval);
+            }
+
+            // Check for ad blockers (simple detection)
+            function checkAdBlocker() {
+                const testAd = document.createElement('div');
+                testAd.innerHTML = '&nbsp;';
+                testAd.className = 'adsbox';
+                document.body.appendChild(testAd);
+
+                setTimeout(function () {
+                    if (testAd.offsetHeight === 0) {
+                        console.log('Ad blocker detected');
+                        // You can show a message to users or implement fallback content
+                    }
+                    document.body.removeChild(testAd);
+                }, 100);
+            }
+
+            // Initialize ads when DOM is ready
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                setupAds();
+                checkAdBlocker();
+            } else {
+                document.addEventListener('DOMContentLoaded', function () {
+                    setupAds();
+                    checkAdBlocker();
+                });
+            }
+
+            // Clean up on page unload
+            window.addEventListener('beforeunload', function () {
+                if (refreshTimer) {
+                    clearInterval(refreshTimer);
+                }
+            });
+        })();
+
+    </script>
+
+
+    <style>
+        #banner-ad {
+            width: 100%;
+            max-width: 425px;
+            margin: 1rem auto 0.5rem;
+            padding: 0.5rem;
+            background: hsl(240, 6%, 97%);
+            box-shadow: 0 4px 15px var(--shadow-dark);
+            border-radius: 8px;
+            position: relative;
+            text-align: center;
+            border: 1px solid var(--accent-gold);
+        }
+
+        #banner-ad::before {
+            content: "Advertisement";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--accent-gold);
+            background: var(--primary-dark);
+            padding: 0 8px;
+            border-radius: 4px;
+            border: 1px solid var(--accent-gold);
+        }
+
+        .ad-divider {
+            width: 90%;
+            max-width: 425px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 0.5rem auto;
+        }
+    </style>
+
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            box-shadow: 0 4px 6px rgba(255, 138, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(255, 138, 0, 0.4);
+        }
+
+        .finance-card {
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .finance-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .expandable-content.expanded {
+            max-height: 1000px;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-orange-50 to-orange-100 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+        <!-- Adult Page -->
+        <div>
+            <header class="bg-orange-500 text-white p-5 flex items-center">
+                <a href="index.html" class="text-white mr-3">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <h2 class="text-xl font-bold">Financial Guidance for Adults</h2>
+            </header>
+
+            <!-- New Engaging Headline Section -->
+            <div class="bg-gradient-to-r from-orange-400 to-orange-500 text-white p-5 text-center">
+                <h1 class="text-2xl font-bold mb-3">Take Control of Your Financial Future</h1>
+                <p class="text-orange-100 mb-4">Smart financial decisions today create the prosperous tomorrow you
+                    deserve. Start your journey to financial freedom with our expert guidance.</p>
+
+                <!-- Orange-themed buttons -->
+                <div class="grid grid-cols-2 gap-3 mt-4">
+                    <a href="savings.html" class="block">
+                        <button
+                            class="bg-white text-orange-600 hover:bg-orange-50 w-full py-3 rounded-lg font-bold shadow-md">
+                            <i class="fas fa-piggy-bank mr-2"></i> Savings
+                        </button>
+                    </a>
+                    <a href="investment.html" class="block">
+                        <button
+                            class="bg-white text-orange-600 hover:bg-orange-50 w-full py-3 rounded-lg font-bold shadow-md">
+                            <i class="fas fa-chart-line mr-2"></i> Investment
+                        </button>
+                    </a>
+                    <a href="loan.html" class="block col-span-2">
+                        <button
+                            class="bg-orange-700 text-white hover:bg-orange-800 w-full py-3 rounded-lg font-bold shadow-md">
+                            <i class="fas fa-hand-holding-usd mr-2"></i> Loan Options
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ads  -->
+            <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                <div id="ad-slot-1" class="ad-container" style="display: block !important;"></div>
+            </div>
+            
+            <!-- New Button to open fund.html -->
+            <a href="fund.html" class="block">
+                <button
+                    class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-3 rounded-lg font-bold mb-5">
+                    <i class="fas fa-university mr-2"></i> Explore Investment Funds
+                </button>
+            </a>
+            <!-- ads units  -->
+            <main class="p-5">
+                <!-- Banking & Financial Services Card -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Banking & Financial Services</h3>
+                    <p class="text-gray-700 mb-3">Optimize your banking relationships and understand different
+                        financial products.</p>
+                    <div class="expandable-content" id="banking-content">
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Banking Essentials:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Checking vs. Savings Accounts - Understand the differences</li>
+                                <li class="mb-1">High-Yield Savings Accounts - Maximize your interest earnings</li>
+                                <li class="mb-1">Certificates of Deposit (CDs) - Fixed-term savings options</li>
+                                <li class="mb-1">Online vs. Traditional Banks - Compare benefits and drawbacks</li>
+                                <li class="mb-1">Overdraft Protection - Avoid costly fees</li>
+                                <li>Understanding FDIC Insurance - Know your deposit protections</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Choosing the Right Bank:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Compare fees (monthly maintenance, ATM, overdraft)</li>
+                                <li class="mb-1">Evaluate interest rates on savings accounts</li>
+                                <li class="mb-1">Check for minimum balance requirements</li>
+                                <li class="mb-1">Assess digital banking capabilities</li>
+                                <li>Review customer service ratings and accessibility</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="toggleExpand('banking-content')">
+                        Learn More
+                    </button>
+                </div>
+
+
+                <!-- Investment Strategies Card -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Investment Strategies</h3>
+                    <p class="text-gray-700 mb-3">Build wealth through smart investing. Learn about stocks, bonds,
+                        mutual funds, and retirement planning.</p>
+                    <div class="expandable-content" id="investment-content">
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Types of Investments:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Stocks - Ownership in companies</li>
+                                <li class="mb-1">Bonds - Loans to governments or corporations</li>
+                                <li class="mb-1">Mutual Funds - Professionally managed portfolios</li>
+                                <li class="mb-1">Real Estate - Property investments</li>
+                                <li>Retirement Accounts (401k, IRA) - Tax-advantaged savings</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Investment Strategies:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Dollar-Cost Averaging - Invest consistently over time</li>
+                                <li class="mb-1">Diversification - Spread risk across different assets</li>
+                                <li class="mb-1">Asset Allocation - Balance based on your age and risk tolerance
+                                </li>
+                                <li>Rebalancing - Periodically adjust your portfolio</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="toggleExpand('investment-content')">
+                        Learn More
+                    </button>
+                </div>
+
+                <!-- Debt Management Card -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Debt Management</h3>
+                    <p class="text-gray-700 mb-3">Take control of your debt with proven repayment strategies and
+                        consolidation options.</p>
+                    <div class="expandable-content" id="debt-content">
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Debt Reduction Strategies:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Avalanche Method - Pay highest interest debts first</li>
+                                <li class="mb-1">Snowball Method - Pay smallest balances first for motivation</li>
+                                <li class="mb-1">Debt Consolidation - Combine multiple debts into one</li>
+                                <li>Balance Transfer - Move debt to lower interest cards</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Managing Credit Card Debt:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Negotiate lower interest rates with creditors</li>
+                                <li class="mb-1">Avoid making only minimum payments</li>
+                                <li class="mb-1">Consider credit counseling services if overwhelmed</li>
+                                <li>Understand the impact of debt on your credit score</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="toggleExpand('debt-content')">
+                        Learn More
+                    </button>
+                </div>
+
+                
+                <!-- ads  -->
+                <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                    <div id="ad-slot-2" class="ad-container" style="display: block !important;"></div>
+                </div>
+
+                
+                <!-- Home Ownership Card -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Home Ownership</h3>
+                    <p class="text-gray-700 mb-3">Navigate the path to home ownership with our mortgage guidance
+                        and affordability calculators.</p>
+                    <div class="expandable-content" id="home-content">
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Home Buying Steps:</h4>
+                            <ol class="text-sm list-decimal pl-5">
+                                <li class="mb-1">Check your credit score and report</li>
+                                <li class="mb-1">Save for a down payment (aim for 20%)</li>
+                                <li class="mb-1">Get pre-approved for a mortgage</li>
+                                <li class="mb-1">Find a real estate agent</li>
+                                <li class="mb-1">Search for homes within your budget</li>
+                                <li class="mb-1">Make an offer and negotiate</li>
+                                <li class="mb-1">Complete home inspection</li>
+                                <li>Close on your new home</li>
+                            </ol>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Mortgage Options:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Fixed-Rate Mortgages - Stable payments for the loan term</li>
+                                <li class="mb-1">Adjustable-Rate Mortgages (ARMs) - Rates change over time</li>
+                                <li class="mb-1">FHA Loans - Lower down payment requirements</li>
+                                <li>VA Loans - Special programs for veterans</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="toggleExpand('home-content')">
+                        Learn More
+                    </button>
+                </div>
+
+                <!-- Retirement Planning Card -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Retirement Planning</h3>
+                    <p class="text-gray-700 mb-3">Secure your future with effective retirement savings
+                        strategies and account options.</p>
+                    <div class="expandable-content" id="retirement-content">
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Retirement Account Options:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">401(k) - Employer-sponsored plan with potential matching</li>
+                                <li class="mb-1">Traditional IRA - Tax-deferred growth with tax-deductible
+                                    contributions</li>
+                                <li class="mb-1">Roth IRA - Tax-free growth with after-tax contributions</li>
+                                <li class="mb-1">SEP IRA - For self-employed individuals and small business
+                                    owners</li>
+                                <li>Annuities - Insurance products that provide guaranteed income</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Retirement Planning Steps:</h4>
+                            <ol class="text-sm list-decimal pl-5">
+                                <li class="mb-1">Calculate your retirement needs (70-80% of pre-retirement
+                                    income)</li>
+                                <li class="mb-1">Start saving early to benefit from compound growth</li>
+                                <li class="mb-1">Take advantage of employer matching contributions</li>
+                                <li class="mb-1">Diversify your retirement investments</li>
+                                <li>Regularly review and adjust your retirement plan</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="toggleExpand('retirement-content')">
+                        Learn More
+                    </button>
+                </div>
+
+                <!-- Insurance Planning Card -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Insurance Planning</h3>
+                    <p class="text-gray-700 mb-3">Protect your assets and loved ones with appropriate insurance
+                        coverage.</p>
+                    <div class="expandable-content" id="insurance-content">
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Essential Insurance Types:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Health Insurance - Covers medical expenses</li>
+                                <li class="mb-1">Life Insurance - Provides for dependents after your death</li>
+                                <li class="mb-1">Disability Insurance - Replaces income if you can't work</li>
+                                <li class="mb-1">Homeowners/Renters Insurance - Protects your dwelling and
+                                    possessions</li>
+                                <li class="mb-1">Auto Insurance - Required by law and protects against
+                                    vehicle-related losses</li>
+                                <li>Liability Insurance - Protects against lawsuits</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Insurance Planning Tips:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Regularly review your coverage needs as life circumstances
+                                    change</li>
+                                <li class="mb-1">Compare quotes from multiple providers</li>
+                                <li class="mb-1">Consider higher deductibles to lower premiums</li>
+                                <li>Bundle policies for potential discounts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="toggleExpand('insurance-content')">
+                        Learn More
+                    </button>
+                </div>
+
+                <!-- Tax Planning Card -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Tax Planning Strategies</h3>
+                    <p class="text-gray-700 mb-3">Minimize your tax liability through smart planning and legal
+                        deductions.</p>
+                    <div class="expandable-content" id="tax-content">
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Tax-Efficient Strategies:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Maximize retirement account contributions</li>
+                                <li class="mb-1">Utilize Health Savings Accounts (HSAs) for medical expenses
+                                </li>
+                                <li class="mb-1">Take advantage of tax-loss harvesting in investments</li>
+                                <li class="mb-1">Consider tax-efficient investment vehicles</li>
+                                <li>Itemize deductions if they exceed the standard deduction</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Common Deductions & Credits:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Mortgage interest deduction</li>
+                                <li class="mb-1">Student loan interest deduction</li>
+                                <li class="mb-1">Charitable contributions</li>
+                                <li class="mb-1">Education credits (American Opportunity Credit, Lifetime
+                                    Learning Credit)</li>
+                                <li>Earned Income Tax Credit (EITC) for qualifying taxpayers</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="toggleExpand('tax-content')">
+                        Learn More
+                    </button>
+                </div>
+
+                <!-- Motivational closing line -->
+                <div class="text-center py-6">
+                    <p class="text-orange-600 font-semibold italic">Start today - your future self will thank you for
+                        the financial security you build now!</p>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Expandable content
+        function toggleExpand(contentId) {
+            const content = document.getElementById(contentId);
+
+            content.classList.toggle('expanded');
+
+            // If it's a button with "Learn More" text, change it to "Show Less"
+            const event = window.event;
+            if (event && event.target && event.target.tagName === 'BUTTON') {
+                if (content.classList.contains('expanded')) {
+                    event.target.textContent = 'Show Less';
+                } else {
+                    event.target.textContent = 'Learn More';
+                }
+            }
+        }
+    </script>
+
+
+   <!-- ads  -->
+    <div id="ad-anchor-slot"></div>
+
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            alert('Right-click is disabled to protect our content.');
+        });
+
+        // Disable keyboard shortcuts
+        document.onkeydown = function (e) {
+            if (
+                (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c' || e.key === 'i' || e.key === 'j')) ||
+                e.key === 'F12' ||
+                (e.metaKey && e.altKey && e.key === 'i')
+            ) {
+                e.preventDefault();
+                alert('Access to developer tools and source code is disabled to protect our content.');
+                return false;
+            }
+            return true;
+        };
+
+        // Disable text selection
+        document.addEventListener('selectstart', function (e) {
+            e.preventDefault();
+        });
+
+        // Disable drag and drop
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+    </script>
+
+    <script>
+        window.googletag = window.googletag || { cmd: [] };
+        var anchorSlot;
+        googletag.cmd.push(function () {
+            anchorSlot = googletag.defineOutOfPageSlot('/23293093930/anchor', googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR);
+            if (anchorSlot) {
+                anchorSlot.addService(googletag.pubads());
+            }
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+ 
+    <script>
+        (function () {
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("DOM fully loaded.");
+
+                function showRewardedAd() {
+                    if (!window.googletag || !googletag.cmd) {
+                        console.error("Google Ad Manager is not properly initialized.");
+                        return;
+                    }
+                    // reward ads
+                    googletag.cmd.push(function () {
+                        try {
+                            const rewardedSlot = googletag
+                                .defineOutOfPageSlot('/23293093930/Interstitialrewarded', googletag.enums.OutOfPageFormat.REWARDED)
+                                .addService(googletag.pubads());
+
+                            googletag.enableServices();
+                            googletag.display(rewardedSlot);
+                            console.log("Attempting to display rewarded ad...");
+
+                            googletag.pubads().addEventListener("rewardedSlotReady", function (evt) {
+                                console.log("Rewarded ad ready.");
+                                evt.makeRewardedVisible();
+                            });
+
+                            googletag.pubads().addEventListener("rewardedSlotClosed", function () {
+                                console.log("Ad closed.");
+                                googletag.destroySlots([rewardedSlot]);
+                            });
+                        } catch (error) {
+                            console.error("Error during ad setup:", error);
+                        }
+                    });
+                }
+
+                // Add 2-second delay before showing the rewarded ad
+                setTimeout(function () {
+                    console.log("2 seconds elapsed, showing rewarded ad...");
+                    showRewardedAd();
+                }, 2000); // 2000 milliseconds = 2 seconds
+            });
+        })();
+    </script>
+
+
+
+</body>
+
+</html>

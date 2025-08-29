@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart - Financial Empowerment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+
+    <script>
+        (function () {
+            // Initialize googletag if not already defined
+            window.googletag = window.googletag || { cmd: [] };
+
+            // Ad slot variables
+            let adSlot1, adSlot2, anchorSlot;
+            const refreshInterval = 30000; // 30 seconds - more user-friendly refresh rate
+            let refreshTimer;
+
+            // Function to set up ads
+            function setupAds() {
+                googletag.cmd.push(function () {
+                    // Setup PubAds
+                    const pubads = googletag.pubads();
+                    pubads.enableSingleRequest();
+                    pubads.setCentering(true);
+
+                    // Apply geotargeting if available
+                    if (window.geoTarget) {
+                        pubads.setLocation(window.geoTarget);
+                    }
+
+                    // Define Ad Slots with consistent IDs
+                    adSlot1 = googletag.defineSlot(
+                        '/23293093930/native',
+                        [[300, 250], [320, 480], [250, 250], [300, 100], 'fluid', [336, 280]],
+                        'ad-slot-1'
+                    ).addService(pubads);
+
+                    adSlot2 = googletag.defineSlot(
+                        '/23293093930/native',
+                        [[300, 250], [320, 480], [250, 250], [300, 100], 'fluid', [336, 280]],
+                        'ad-slot-2'
+                    ).addService(pubads);
+
+                    // Define anchor ad with proper ID
+                    anchorSlot = googletag.defineOutOfPageSlot(
+                        '/23293093930/native',
+                        googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR
+                    );
+
+                    if (anchorSlot) {
+                        anchorSlot.addService(pubads);
+                        // Use the correct ID for the anchor ad
+                        anchorSlot.setElementId('ad-anchor-slot');
+                    }
+
+                    // Event listeners for ad loading
+                    pubads.addEventListener('slotRenderEnded', function (event) {
+                        // Handle ad render events if needed
+                        const slotId = event.slot.getSlotElementId();
+                        const isEmpty = event.isEmpty;
+
+                        // Example: hide containers with no ads
+                        if (isEmpty && document.getElementById(slotId)) {
+                            document.getElementById(slotId).style.display = 'none';
+                        }
+                    });
+
+                    // Enable services
+                    googletag.enableServices();
+
+                    // Display ads
+                    try {
+                        if (document.getElementById('ad-slot-1')) {
+                            googletag.display('ad-slot-1');
+                        }
+                        if (document.getElementById('ad-slot-2')) {
+                            googletag.display('ad-slot-2');
+                        }
+                        if (document.getElementById('ad-anchor-slot')) {
+                            googletag.display('ad-anchor-slot');
+                        }
+                    } catch (error) {
+                        console.log('Error displaying ads:', error);
+                    }
+
+                    // Set up periodic refresh with error handling
+                    setupAdRefresh();
+                });
+            }
+
+            // Function to handle ad refresh
+            function setupAdRefresh() {
+                if (refreshTimer) {
+                    clearInterval(refreshTimer);
+                }
+
+                refreshTimer = setInterval(function () {
+                    try {
+                        // Only refresh if slots exist and are defined
+                        const slotsToRefresh = [];
+                        if (adSlot1) slotsToRefresh.push(adSlot1);
+                        if (adSlot2) slotsToRefresh.push(adSlot2);
+
+                        if (slotsToRefresh.length > 0) {
+                            googletag.cmd.push(function () {
+                                googletag.pubads().refresh(slotsToRefresh);
+                            });
+                        }
+                    } catch (error) {
+                        console.log('Error refreshing ads:', error);
+                        clearInterval(refreshTimer); // Stop trying on persistent errors
+                    }
+                }, refreshInterval);
+            }
+
+            // Check for ad blockers (simple detection)
+            function checkAdBlocker() {
+                const testAd = document.createElement('div');
+                testAd.innerHTML = '&nbsp;';
+                testAd.className = 'adsbox';
+                document.body.appendChild(testAd);
+
+                setTimeout(function () {
+                    if (testAd.offsetHeight === 0) {
+                        console.log('Ad blocker detected');
+                        // You can show a message to users or implement fallback content
+                    }
+                    document.body.removeChild(testAd);
+                }, 100);
+            }
+
+            // Initialize ads when DOM is ready
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                setupAds();
+                checkAdBlocker();
+            } else {
+                document.addEventListener('DOMContentLoaded', function () {
+                    setupAds();
+                    checkAdBlocker();
+                });
+            }
+
+            // Clean up on page unload
+            window.addEventListener('beforeunload', function () {
+                if (refreshTimer) {
+                    clearInterval(refreshTimer);
+                }
+            });
+        })();
+
+    </script>
+
+
+    <style>
+        #banner-ad {
+            width: 100%;
+            max-width: 425px;
+            margin: 1rem auto 0.5rem;
+            padding: 0.5rem;
+            background: hsl(240, 6%, 97%);
+            box-shadow: 0 4px 15px var(--shadow-dark);
+            border-radius: 8px;
+            position: relative;
+            text-align: center;
+            border: 1px solid var(--accent-gold);
+        }
+
+        #banner-ad::before {
+            content: "Advertisement";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--accent-gold);
+            background: var(--primary-dark);
+            padding: 0 8px;
+            border-radius: 4px;
+            border: 1px solid var(--accent-gold);
+        }
+
+        .ad-divider {
+            width: 90%;
+            max-width: 425px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 0.5rem auto;
+        }
+    </style>
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            box-shadow: 0 4px 6px rgba(255, 138, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(255, 138, 0, 0.4);
+        }
+
+        .age-btn {
+            min-height: 120px;
+            border-radius: 16px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .age-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .finance-card {
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .finance-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .active-page {
+            display: block;
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .expandable-content.expanded {
+            max-height: 1000px;
+        }
+
+        .calculator {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .calculator.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background-color: #f97316;
+            color: white;
+        }
+    </style>
+
+
+  
+
+</head>
+
+<body class="bg-gradient-to-br from-orange-50 to-orange-100 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+        <!-- Main Page -->
+        <div id="main-page" class="page active-page">
+            <header class="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-6 text-center">
+                <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-coins text-4xl"></i>
+                </div>
+                <h1 class="text-3xl font-bold mb-2">FinSmart</h1>
+                <p class="opacity-90">Smart Financial Choices for a Better Tomorrow</p>
+            </header>
+
+            <!-- ads  -->
+            <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                <div id="ad-slot-1" class="ad-container" style="display: block !important;"></div>
+            </div>
+
+            <main class="p-6">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Age Verification</h2>
+                    <p class="text-gray-600">To ensure we provide you with appropriate financial content, please confirm
+                        your age group.</p>
+                </div>
+
+                <div class="space-y-5 mb-8">
+                    <a href="fin24.html" class="block">
+                        <div
+                            class="age-btn bg-gradient-to-r from-orange-400 to-orange-500 text-white p-5 text-center cursor-pointer">
+                            <i class="fas fa-user-check text-3xl mb-3"></i>
+                            <h3 class="text-xl font-bold mb-1">Age 18+</h3>
+                            <p class="text-sm opacity-90">I am an adult seeking financial guidance</p>
+                        </div>
+                    </a>
+
+                    <a href="finpro.html" class="block">
+                        <div
+                            class="age-btn bg-gradient-to-r from-gray-700 to-gray-800 text-white p-5 text-center cursor-pointer">
+                            <i class="fas fa-user-graduate text-3xl mb-3"></i>
+                            <h3 class="text-xl font-bold mb-1">Under 18</h3>
+                            <p class="text-sm opacity-90">I am a minor learning about finance</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Expandable Financial Tips Section -->
+                <div class="bg-orange-50 rounded-xl p-4 mb-5">
+                    <div class="flex justify-between items-center cursor-pointer"
+                        onclick="toggleExpand('financial-tips')">
+                        <h3 class="font-bold text-orange-700">Essential Financial Tips</h3>
+                        <i class="fas fa-chevron-down text-orange-700" id="financial-tips-chevron"></i>
+                    </div>
+                    <div class="expandable-content" id="financial-tips">
+                        <div class="pt-4">
+                            <div class="flex items-start mb-3">
+                                <div class="bg-orange-100 p-2 rounded-lg mr-3">
+                                    <i class="fas fa-piggy-bank text-orange-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Pay Yourself First</h4>
+                                    <p class="text-sm text-gray-600">Set aside at least 20% of your income for savings
+                                        before spending.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start mb-3">
+                                <div class="bg-orange-100 p-2 rounded-lg mr-3">
+                                    <i class="fas fa-chart-line text-orange-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Invest Early</h4>
+                                    <p class="text-sm text-gray-600">The power of compounding works best when you start
+                                        investing early.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-orange-100 p-2 rounded-lg mr-3">
+                                    <i class="fas fa-credit-card text-orange-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Avoid Debt</h4>
+                                    <p class="text-sm text-gray-600">Minimize high-interest debt and always pay your
+                                        credit cards in full.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expandable News Section -->
+                <div class="bg-gray-100 rounded-xl p-4 mb-5">
+                    <div class="flex justify-between items-center cursor-pointer"
+                        onclick="toggleExpand('financial-news')">
+                        <h3 class="font-bold text-gray-700">Latest Financial News</h3>
+                        <i class="fas fa-chevron-down text-gray-700" id="financial-news-chevron"></i>
+                    </div>
+                    <div class="expandable-content" id="financial-news">
+                        <div class="pt-4">
+                            <div class="mb-3 pb-3 border-b border-gray-200">
+                                <h4 class="font-bold">Stock Market Reaches New Highs</h4>
+                                <p class="text-sm text-gray-600">Major indices climbed to record levels amid positive
+                                    economic data.</p>
+                                <p class="text-xs text-gray-500 mt-1">2 hours ago</p>
+                            </div>
+                            <div class="mb-3 pb-3 border-b border-gray-200">
+                                <h4 class="font-bold">New Regulations for Cryptocurrencies</h4>
+                                <p class="text-sm text-gray-600">Government announces framework for digital asset
+                                    regulation.</p>
+                                <p class="text-xs text-gray-500 mt-1">1 day ago</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Interest Rates Remain Steady</h4>
+                                <p class="text-sm text-gray-600">Central bank keeps rates unchanged, citing stable
+                                    inflation.</p>
+                                <p class="text-xs text-gray-500 mt-1">2 days ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ads  -->
+                <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                    <div id="ad-slot-1" class="ad-container" style="display: block !important;"></div>
+                </div>
+
+
+                <!-- ads units  -->
+                <!-- Interactive Calculator -->
+                <div class="bg-white border border-orange-200 rounded-xl p-4 mb-5">
+                    <h3 class="font-bold text-orange-600 mb-3">Financial Calculators</h3>
+
+                    <div class="flex space-x-2 mb-4">
+                        <button class="tab-button flex-1 py-2 text-xs font-medium rounded-lg bg-gray-100"
+                            onclick="showCalculator('savings-calc')">
+                            Savings
+                        </button>
+                        <button class="tab-button flex-1 py-2 text-xs font-medium rounded-lg bg-gray-100"
+                            onclick="showCalculator('loan-calc')">
+                            Loan
+                        </button>
+                        <button class="tab-button flex-1 py-2 text-xs font-medium rounded-lg bg-gray-100"
+                            onclick="showCalculator('retirement-calc')">
+                            Retirement
+                        </button>
+                    </div>
+
+                    <div id="savings-calc" class="calculator active">
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Monthly Contribution ($)</label>
+                            <input type="number" id="savings-amount"
+                                class="w-full p-2 border border-gray-300 rounded-lg" value="100">
+                        </div>
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Annual Interest Rate (%)</label>
+                            <input type="number" id="savings-rate" class="w-full p-2 border border-gray-300 rounded-lg"
+                                value="5">
+                        </div>
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Years to Save</label>
+                            <input type="number" id="savings-years" class="w-full p-2 border border-gray-300 rounded-lg"
+                                value="10">
+                        </div>
+                        <button class="w-full bg-orange-500 text-white py-2 rounded-lg font-bold"
+                            onclick="calculateSavings()">
+                            Calculate
+                        </button>
+                        <div class="mt-3 p-3 bg-orange-50 rounded-lg">
+                            <p class="text-sm">Future Value: <span id="savings-result" class="font-bold">$0</span></p>
+                        </div>
+                    </div>
+
+                    <div id="loan-calc" class="calculator">
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Loan Amount ($)</label>
+                            <input type="number" id="loan-amount" class="w-full p-2 border border-gray-300 rounded-lg"
+                                value="10000">
+                        </div>
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Annual Interest Rate (%)</label>
+                            <input type="number" id="loan-rate" class="w-full p-2 border border-gray-300 rounded-lg"
+                                value="5">
+                        </div>
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Loan Term (Years)</label>
+                            <input type="number" id="loan-years" class="w-full p-2 border border-gray-300 rounded-lg"
+                                value="5">
+                        </div>
+                        <button class="w-full bg-orange-500 text-white py-2 rounded-lg font-bold"
+                            onclick="calculateLoan()">
+                            Calculate
+                        </button>
+                        <div class="mt-3 p-3 bg-orange-50 rounded-lg">
+                            <p class="text-sm">Monthly Payment: <span id="loan-result" class="font-bold">$0</span></p>
+                        </div>
+                    </div>
+
+                    <div id="retirement-calc" class="calculator">
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Current Savings ($)</label>
+                            <input type="number" id="retirement-current"
+                                class="w-full p-2 border border-gray-300 rounded-lg" value="50000">
+                        </div>
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Monthly Contribution ($)</label>
+                            <input type="number" id="retirement-contribution"
+                                class="w-full p-2 border border-gray-300 rounded-lg" value="500">
+                        </div>
+                        <div class="mb-3">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Years to Retirement</label>
+                            <input type="number" id="retirement-years"
+                                class="w-full p-2 border border-gray-300 rounded-lg" value="30">
+                        </div>
+                        <button class="w-full bg-orange-500 text-white py-2 rounded-lg font-bold"
+                            onclick="calculateRetirement()">
+                            Calculate
+                        </button>
+                        <div class="mt-3 p-3 bg-orange-50 rounded-lg">
+                            <p class="text-sm">Retirement Fund: <span id="retirement-result" class="font-bold">$0</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-center text-gray-500 text-xs">
+                    Your privacy is important to us. We use this information to provide content suitable for your age
+                    group.
+                </p>
+            </main>
+
+            <footer class="bg-gray-100 p-4 text-center text-gray-500 text-sm">
+                <p>© 2023 FinSmart. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Expandable content
+        function toggleExpand(contentId) {
+            const content = document.getElementById(contentId);
+            const chevron = document.getElementById(contentId + '-chevron');
+
+            content.classList.toggle('expanded');
+
+            if (chevron) {
+                if (content.classList.contains('expanded')) {
+                    chevron.classList.remove('fa-chevron-down');
+                    chevron.classList.add('fa-chevron-up');
+                } else {
+                    chevron.classList.remove('fa-chevron-up');
+                    chevron.classList.add('fa-chevron-down');
+                }
+            }
+
+            // If it's a button with "Learn More" text, change it to "Show Less"
+            const event = window.event;
+            if (event && event.target && event.target.tagName === 'BUTTON') {
+                if (content.classList.contains('expanded')) {
+                    event.target.textContent = 'Show Less';
+                } else {
+                    event.target.textContent = 'Learn More';
+                }
+            }
+        }
+
+        // Calculator tabs
+        function showCalculator(calcId) {
+            document.querySelectorAll('.calculator').forEach(calc => {
+                calc.classList.remove('active');
+            });
+            document.getElementById(calcId).classList.add('active');
+
+            // Update active tab button
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('bg-gray-100');
+            });
+            event.target.classList.add('active');
+            event.target.classList.remove('bg-gray-100');
+        }
+
+        // Savings calculator
+        function calculateSavings() {
+            const amount = parseFloat(document.getElementById('savings-amount').value);
+            const rate = parseFloat(document.getElementById('savings-rate').value) / 100;
+            const years = parseFloat(document.getElementById('savings-years').value);
+
+            // Future value of a series formula: FV = P * (((1 + r)^n - 1) / r)
+            const futureValue = amount * 12 * ((Math.pow(1 + rate, years) - 1) / rate);
+
+            document.getElementById('savings-result').textContent = '$' + futureValue.toFixed(2);
+        }
+
+        // Loan calculator
+        function calculateLoan() {
+            const amount = parseFloat(document.getElementById('loan-amount').value);
+            const rate = parseFloat(document.getElementById('loan-rate').value) / 100 / 12; // Monthly rate
+            const years = parseFloat(document.getElementById('loan-years').value);
+            const periods = years * 12;
+
+            // Monthly payment formula: P = (r*PV) / (1 - (1 + r)^(-n))
+            const monthlyPayment = (rate * amount) / (1 - Math.pow(1 + rate, -periods));
+
+            document.getElementById('loan-result').textContent = '$' + monthlyPayment.toFixed(2);
+        }
+
+        // Retirement calculator
+        function calculateRetirement() {
+            const current = parseFloat(document.getElementById('retirement-current').value);
+            const contribution = parseFloat(document.getElementById('retirement-contribution').value);
+            const years = parseFloat(document.getElementById('retirement-years').value);
+            const rate = 0.07; // Assuming 7% annual return
+
+            // Future value with regular contributions: FV = P*(1+r)^n + C*(((1+r)^n - 1)/r)
+            const futureValue = current * Math.pow(1 + rate, years) +
+                contribution * 12 * ((Math.pow(1 + rate, years) - 1) / rate);
+
+            document.getElementById('retirement-result').textContent = '$' + futureValue.toFixed(2);
+        }
+
+        // Initialize calculators
+        document.addEventListener('DOMContentLoaded', function () {
+            calculateSavings();
+            calculateLoan();
+            calculateRetirement();
+
+            // Set first tab as active
+            document.querySelector('.tab-button').classList.add('active');
+            document.querySelector('.tab-button').classList.remove('bg-gray-100');
+        });
+    </script>
+
+
+
+
+    <!-- ads  -->
+    <div id="ad-anchor-slot"></div>
+
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            alert('Right-click is disabled to protect our content.');
+        });
+
+        // Disable keyboard shortcuts
+        document.onkeydown = function (e) {
+            if (
+                (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c' || e.key === 'i' || e.key === 'j')) ||
+                e.key === 'F12' ||
+                (e.metaKey && e.altKey && e.key === 'i')
+            ) {
+                e.preventDefault();
+                alert('Access to developer tools and source code is disabled to protect our content.');
+                return false;
+            }
+            return true;
+        };
+
+        // Disable text selection
+        document.addEventListener('selectstart', function (e) {
+            e.preventDefault();
+        });
+
+        // Disable drag and drop
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+    </script>
+
+    <script>
+        window.googletag = window.googletag || { cmd: [] };
+        var anchorSlot;
+        googletag.cmd.push(function () {
+            anchorSlot = googletag.defineOutOfPageSlot('/23293093930/anchor', googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR);
+            if (anchorSlot) {
+                anchorSlot.addService(googletag.pubads());
+            }
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+ 
+    <script>
+        (function () {
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("DOM fully loaded.");
+
+                function showRewardedAd() {
+                    if (!window.googletag || !googletag.cmd) {
+                        console.error("Google Ad Manager is not properly initialized.");
+                        return;
+                    }
+                    // reward ads
+                    googletag.cmd.push(function () {
+                        try {
+                            const rewardedSlot = googletag
+                                .defineOutOfPageSlot('/23293093930/Interstitialrewarded', googletag.enums.OutOfPageFormat.REWARDED)
+                                .addService(googletag.pubads());
+
+                            googletag.enableServices();
+                            googletag.display(rewardedSlot);
+                            console.log("Attempting to display rewarded ad...");
+
+                            googletag.pubads().addEventListener("rewardedSlotReady", function (evt) {
+                                console.log("Rewarded ad ready.");
+                                evt.makeRewardedVisible();
+                            });
+
+                            googletag.pubads().addEventListener("rewardedSlotClosed", function () {
+                                console.log("Ad closed.");
+                                googletag.destroySlots([rewardedSlot]);
+                            });
+                        } catch (error) {
+                            console.error("Error during ad setup:", error);
+                        }
+                    });
+                }
+
+                // Add 2-second delay before showing the rewarded ad
+                setTimeout(function () {
+                    console.log("2 seconds elapsed, showing rewarded ad...");
+                    showRewardedAd();
+                }, 2000); // 2000 milliseconds = 2 seconds
+            });
+        })();
+    </script>
+
+
+
+
+
+</body>
+
+</html>

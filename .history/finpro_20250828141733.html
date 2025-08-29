@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart - Financial Education for Minors</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+
+    <script>
+        (function () {
+            // Initialize googletag if not already defined
+            window.googletag = window.googletag || { cmd: [] };
+
+            // Ad slot variables
+            let adSlot1, adSlot2, anchorSlot;
+            const refreshInterval = 30000; // 30 seconds - more user-friendly refresh rate
+            let refreshTimer;
+
+            // Function to set up ads
+            function setupAds() {
+                googletag.cmd.push(function () {
+                    // Setup PubAds
+                    const pubads = googletag.pubads();
+                    pubads.enableSingleRequest();
+                    pubads.setCentering(true);
+
+                    // Apply geotargeting if available
+                    if (window.geoTarget) {
+                        pubads.setLocation(window.geoTarget);
+                    }
+
+                    // Define Ad Slots with consistent IDs
+                    adSlot1 = googletag.defineSlot(
+                        '/23300646440/Native',
+                        [[300, 250], [320, 480], [250, 250], [300, 100], 'fluid', [336, 280]],
+                        'ad-slot-1'
+                    ).addService(pubads);
+
+                    adSlot2 = googletag.defineSlot(
+                        '/23300646440/Native',
+                        [[300, 250], [320, 480], [250, 250], [300, 100], 'fluid', [336, 280]],
+                        'ad-slot-2'
+                    ).addService(pubads);
+
+                    // Define anchor ad with proper ID
+                    anchorSlot = googletag.defineOutOfPageSlot(
+                        '/23300646440/Native',
+                        googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR
+                    );
+
+                    if (anchorSlot) {
+                        anchorSlot.addService(pubads);
+                        // Use the correct ID for the anchor ad
+                        anchorSlot.setElementId('ad-anchor-slot');
+                    }
+
+                    // Event listeners for ad loading
+                    pubads.addEventListener('slotRenderEnded', function (event) {
+                        // Handle ad render events if needed
+                        const slotId = event.slot.getSlotElementId();
+                        const isEmpty = event.isEmpty;
+
+                        // Example: hide containers with no ads
+                        if (isEmpty && document.getElementById(slotId)) {
+                            document.getElementById(slotId).style.display = 'none';
+                        }
+                    });
+
+                    // Enable services
+                    googletag.enableServices();
+
+                    // Display ads
+                    try {
+                        if (document.getElementById('ad-slot-1')) {
+                            googletag.display('ad-slot-1');
+                        }
+                        if (document.getElementById('ad-slot-2')) {
+                            googletag.display('ad-slot-2');
+                        }
+                        if (document.getElementById('ad-anchor-slot')) {
+                            googletag.display('ad-anchor-slot');
+                        }
+                    } catch (error) {
+                        console.log('Error displaying ads:', error);
+                    }
+
+                    // Set up periodic refresh with error handling
+                    setupAdRefresh();
+                });
+            }
+
+            // Function to handle ad refresh
+            function setupAdRefresh() {
+                if (refreshTimer) {
+                    clearInterval(refreshTimer);
+                }
+
+                refreshTimer = setInterval(function () {
+                    try {
+                        // Only refresh if slots exist and are defined
+                        const slotsToRefresh = [];
+                        if (adSlot1) slotsToRefresh.push(adSlot1);
+                        if (adSlot2) slotsToRefresh.push(adSlot2);
+
+                        if (slotsToRefresh.length > 0) {
+                            googletag.cmd.push(function () {
+                                googletag.pubads().refresh(slotsToRefresh);
+                            });
+                        }
+                    } catch (error) {
+                        console.log('Error refreshing ads:', error);
+                        clearInterval(refreshTimer); // Stop trying on persistent errors
+                    }
+                }, refreshInterval);
+            }
+
+            // Check for ad blockers (simple detection)
+            function checkAdBlocker() {
+                const testAd = document.createElement('div');
+                testAd.innerHTML = '&nbsp;';
+                testAd.className = 'adsbox';
+                document.body.appendChild(testAd);
+
+                setTimeout(function () {
+                    if (testAd.offsetHeight === 0) {
+                        console.log('Ad blocker detected');
+                        // You can show a message to users or implement fallback content
+                    }
+                    document.body.removeChild(testAd);
+                }, 100);
+            }
+
+            // Initialize ads when DOM is ready
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                setupAds();
+                checkAdBlocker();
+            } else {
+                document.addEventListener('DOMContentLoaded', function () {
+                    setupAds();
+                    checkAdBlocker();
+                });
+            }
+
+            // Clean up on page unload
+            window.addEventListener('beforeunload', function () {
+                if (refreshTimer) {
+                    clearInterval(refreshTimer);
+                }
+            });
+        })();
+
+    </script>
+
+
+    <style>
+        #banner-ad {
+            width: 100%;
+            max-width: 425px;
+            margin: 1rem auto 0.5rem;
+            padding: 0.5rem;
+            background: hsl(240, 6%, 97%);
+            box-shadow: 0 4px 15px var(--shadow-dark);
+            border-radius: 8px;
+            position: relative;
+            text-align: center;
+            border: 1px solid var(--accent-gold);
+        }
+
+        #banner-ad::before {
+            content: "Advertisement";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--accent-gold);
+            background: var(--primary-dark);
+            padding: 0 8px;
+            border-radius: 4px;
+            border: 1px solid var(--accent-gold);
+        }
+
+        .ad-divider {
+            width: 90%;
+            max-width: 425px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 0.5rem auto;
+        }
+    </style>
+
+
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .finance-card {
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .finance-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .expandable-content.expanded {
+            max-height: 1000px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e5e7eb;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .calculator-container {
+            background-color: #f9fafb;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .calculator-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .calculator-result {
+            margin-top: 16px;
+            padding: 12px;
+            background-color: #e6f4ea;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .tab-button {
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-right: 8px;
+            font-weight: 500;
+        }
+
+        .tab-button.active {
+            background-color: #ee8139;
+            color: white;
+        }
+
+        .achievement-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f0f9ff;
+            border-radius: 20px;
+            padding: 6px 12px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-orange-50 to-indigo-100 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+        <!-- Minor Page -->
+        <div>
+            <header
+                class="bg-gradient-to-r from-orange-600 to-indigo-700 text-white p-5 flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-white mr-3">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <h2 class="text-xl font-bold">Financial Education for Minors</h2>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-sm mr-2">Level 2</span>
+                    <i class="fas fa-user-graduate text-yellow-300"></i>
+                </div>
+            </header>
+            <!-- ads  -->
+            <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                <div id="ad-slot-1" class="ad-container" style="display: block !important;"></div>
+
+            </div>
+            <!-- ads units  -->
+
+            <main class="p-5">
+                <!-- Progress Section -->
+                <div class="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-5">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-bold text-orange-800">Your Progress</h3>
+                        <span class="text-sm text-orange-600">40% Complete</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill bg-orange-500" style="width: 40%"></div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="achievement-badge">
+                            <i class="fas fa-medal text-yellow-500 mr-1"></i> Budget Master
+                        </span>
+                        <span class="achievement-badge">
+                            <i class="fas fa-trophy text-orange-500 mr-1"></i> Savings Beginner
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Tabs Navigation -->
+                <div class="flex mb-5 bg-gray-100 p-1 rounded-lg">
+                    <div class="tab-button active" onclick="switchTab('learn')">Learn</div>
+                    <div class="tab-button" onclick="switchTab('calculate')">Calculate</div>
+                    <div class="tab-button" onclick="switchTab('goals')">Goals</div>
+                </div>
+
+                <!-- New Button to open finance22.html -->
+                <a href="finance22.html" class="block">
+                    <button
+                        class="btn-primary bg-indigo-600 hover:bg-indigo-700 text-white w-full py-3 rounded-lg font-bold mb-5"
+                        style="background-color: rgb(230, 134, 24) !important;">
+                        <i class="fas fa-piggy-bank mr-2"></i> Learn About Basic Finance
+                    </button>
+                </a>
+
+                <!-- Learn Tab Content -->
+                <div id="learn-tab">
+                    <div class="finance-card bg-white border border-gray-200 p-5 mb-5">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-blue-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-money-bill-wave text-blue-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Allowance Management</h3>
+                        </div>
+                        <p class="text-gray-700 mb-3">Learn how to manage your allowance wisely by creating a simple
+                            budget plan.</p>
+                        <div class="expandable-content" id="allowance-content">
+                            <div class="bg-gray-100 p-3 rounded-lg mb-3">
+                                <h4 class="font-bold mb-2">Budgeting Tips for Teens:</h4>
+                                <ul class="text-sm list-disc pl-5">
+                                    <li class="mb-1">Track your spending for a month</li>
+                                    <li class="mb-1">Divide money into categories: spending, saving, giving</li>
+                                    <li class="mb-1">Set financial goals (new phone, car, college)</li>
+                                    <li>Use budgeting apps designed for teens</li>
+                                </ul>
+                            </div>
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-3">
+                                <p class="text-sm text-yellow-700">
+                                    <i class="fas fa-lightbulb mr-1"></i> <strong>Pro Tip:</strong> Try the 50/30/20
+                                    rule - 50% for needs, 30% for wants, and 20% for savings.
+                                </p>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary text-white w-full py-2 rounded-lg font-bold"
+                            style="background-color: rgb(238, 133, 14) !important;"
+                            onclick="toggleExpand('allowance-content')">
+                            Learn More
+                        </button>
+
+                    </div>
+                    <!-- ads  -->
+                    <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                        <div id="ad-slot-2" class="ad-container" style="display: block !important;"></div>
+                    </div>
+
+
+
+                    <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-green-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-piggy-bank text-green-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-orange-800">Saving for Goals</h3>
+                        </div>
+                        <p class="text-orange-700 mb-3">Whether it's a new video game, car, or college, we'll help you
+                            create a savings plan.</p>
+                        <div class="expandable-content" id="savings-content">
+                            <div class="bg-orange-100 p-3 rounded-lg mb-3">
+                                <h4 class="font-bold mb-2">Smart Saving Strategies:</h4>
+                                <ul class="text-sm list-disc pl-5">
+                                    <li class="mb-1">Set specific, measurable goals</li>
+                                    <li class="mb-1">Automate savings if possible</li>
+                                    <li class="mb-1">Look for ways to increase income (part-time job, chores)</li>
+                                    <li>Avoid impulse purchases - practice delayed gratification</li>
+                                </ul>
+                            </div>
+                            <div class="calculator-container">
+                                <h4 class="font-bold mb-2">Savings Calculator</h4>
+                                <p class="text-sm mb-3">See how long it will take to reach your goal</p>
+                                <input type="number" id="goal-amount" class="calculator-input"
+                                    placeholder="Goal Amount ($)">
+                                <input type="number" id="savings-per-month" class="calculator-input"
+                                    placeholder="Monthly Savings ($)">
+                                <button
+                                    class="btn-primary bg-green-600 hover:bg-green-700 text-white w-full py-2 rounded-lg font-bold"
+                                    onclick="calculateSavings()">
+                                    Calculate
+                                </button>
+                                <div id="savings-result" class="calculator-result"></div>
+                            </div>
+                        </div>
+                        <button
+                            class="btn-primary bg-orange-600 hover:bg-orange-700 text-white w-full py-2 rounded-lg font-bold"
+                            onclick="toggleExpand('savings-content')">
+                            Learn More
+                        </button>
+                    </div>
+
+                    <div class="finance-card bg-white border border-gray-200 p-5 mb-5">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-orange-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-graduation-cap text-orange-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">College Preparation</h3>
+                        </div>
+                        <p class="text-gray-700 mb-3">Start planning for your future education now with our college
+                            savings guide.</p>
+                        <div class="expandable-content" id="college-content">
+                            <div class="bg-gray-100 p-3 rounded-lg mb-3">
+                                <h4 class="font-bold mb-2">Ways to Save for College:</h4>
+                                <ul class="text-sm list-disc pl-5">
+                                    <li class="mb-1">529 Plans - Tax-advantaged education savings accounts</li>
+                                    <li class="mb-1">Coverdell ESA - Education savings account for K-12 and college</li>
+                                    <li class="mb-1">UTMA/UGMA Accounts - Custodial accounts for minors</li>
+                                    <li>Scholarships and grants - Free money for college</li>
+                                </ul>
+                            </div>
+                            <div class="bg-blue-50 border-l-4 border-blue-400 p-3">
+                                <p class="text-sm text-blue-700">
+                                    <i class="fas fa-info-circle mr-1"></i> <strong>Did You Know?</strong> Starting to
+                                    save early can reduce the amount of student loans you'll need later.
+                                </p>
+                            </div>
+                        </div>
+                        <button
+                            class="btn-primary bg-orange-600 hover:bg-orange-700 text-white w-full py-2 rounded-lg font-bold"
+                            onclick="toggleExpand('college-content')">
+                            Learn More
+                        </button>
+                    </div>
+                    >
+                </div>
+
+                <!-- Calculate Tab Content (Hidden by Default) -->
+                <div id="calculate-tab" class="hidden">
+                    <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                        <h3 class="text-xl font-bold text-orange-800 mb-3">Savings Calculator</h3>
+                        <p class="text-orange-700 mb-3">Calculate how long it will take to reach your financial goals.
+                        </p>
+
+                        <div class="mb-4">
+                            <label class="block text-orange-700 text-sm font-bold mb-2" for="calc-goal">
+                                Financial Goal ($)
+                            </label>
+                            <input class="calculator-input" id="calc-goal" type="number" placeholder="Example: 1000">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-orange-700 text-sm font-bold mb-2" for="calc-monthly">
+                                Monthly Savings ($)
+                            </label>
+                            <input class="calculator-input" id="calc-monthly" type="number" placeholder="Example: 100">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-orange-700 text-sm font-bold mb-2" for="calc-interest">
+                                Annual Interest Rate (%)
+                            </label>
+                            <input class="calculator-input" id="calc-interest" type="number" placeholder="Example: 5"
+                                value="5">
+                        </div>
+
+                        <button
+                            class="btn-primary bg-blue-600 hover:bg-blue-700 text-white w-full py-2 rounded-lg font-bold mb-3"
+                            onclick="calculateDetailedSavings()">
+                            Calculate
+                        </button>
+
+                        <div id="detailed-result" class="calculator-result"></div>
+                    </div>
+
+                    <div class="finance-card bg-white border border-orange-200 p-5">
+                        <h3 class="text-xl font-bold text-orange-800 mb-3">Allowance Planner</h3>
+                        <p class="text-orange-700 mb-3">Plan how to allocate your weekly or monthly allowance.</p>
+
+                        <div class="mb-4">
+                            <label class="block text-orange-700 text-sm font-bold mb-2" for="allowance-amount">
+                                Allowance Amount ($)
+                            </label>
+                            <input class="calculator-input" id="allowance-amount" type="number"
+                                placeholder="Example: 50">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-orange-700 text-sm font-bold mb-2" for="savings-percent">
+                                Percentage to Save (%)
+                            </label>
+                            <input class="calculator-input" id="savings-percent" type="number" placeholder="Example: 20"
+                                value="20">
+                        </div>
+
+                        <button
+                            class="btn-primary bg-orange-600 hover:bg-orange-700 text-white w-full py-2 rounded-lg font-bold mb-3"
+                            onclick="calculateAllowance()">
+                            Calculate Allocation
+                        </button>
+
+                        <div id="allowance-result" class="calculator-result"></div>
+                    </div>
+                </div>
+
+                <!-- Goals Tab Content (Hidden by Default) -->
+                <div id="goals-tab" class="hidden">
+                    <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                        <h3 class="text-xl font-bold text-orange-800 mb-3">Set Your Financial Goals</h3>
+                        <p class="text-orange-700 mb-3">Define and track your financial objectives.</p>
+
+                        <div class="mb-4">
+                            <label class="block text-orange-700 text-sm font-bold mb-2" for="goal-name">
+                                Goal Name
+                            </label>
+                            <input class="calculator-input" id="goal-name" type="text"
+                                placeholder="Example: New Gaming Console">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-orange-700 text-sm font-bold mb-2" for="goal-target">
+                                Target Amount ($)
+                            </label>
+                            <input class="calculator-input" id="goal-target" type="number" placeholder="Example: 400">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-orange-700 text-sm font-bold mb-2" for="goal-deadline">
+                                Target Date
+                            </label>
+                            <input class="calculator-input" id="goal-deadline" type="date">
+                        </div>
+
+                        <button
+                            class="btn-primary bg-orange-600 hover:bg-orange-700 text-white w-full py-2 rounded-lg font-bold mb-3"
+                            onclick="addGoal()">
+                            Add Goal
+                        </button>
+                    </div>
+
+                    <div class="finance-card bg-white border border-orange-200 p-5">
+                        <h3 class="text-xl font-bold text-orange-800 mb-3">Your Financial Goals</h3>
+                        <p class="text-orange-700 mb-3">Track your progress toward achieving your goals.</p>
+
+                        <div id="goals-list">
+                            <p class="text-orange-500 text-center py-4">No goals set yet. Add your first goal above!</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Expandable content
+        function toggleExpand(contentId) {
+            const content = document.getElementById(contentId);
+
+            content.classList.toggle('expanded');
+
+            // If it's a button with "Learn More" text, change it to "Show Less"
+            const event = window.event;
+            if (event && event.target && event.target.tagName === 'BUTTON') {
+                if (content.classList.contains('expanded')) {
+                    event.target.textContent = 'Show Less';
+                } else {
+                    event.target.textContent = 'Learn More';
+                }
+            }
+        }
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.getElementById('learn-tab').classList.add('hidden');
+            document.getElementById('calculate-tab').classList.add('hidden');
+            document.getElementById('goals-tab').classList.add('hidden');
+
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.remove('hidden');
+
+            // Update tab buttons
+            const tabs = document.querySelectorAll('.tab-button');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            event.currentTarget.classList.add('active');
+        }
+
+        // Savings calculator in the savings section
+        function calculateSavings() {
+            const goalAmount = parseFloat(document.getElementById('goal-amount').value);
+            const monthlySavings = parseFloat(document.getElementById('savings-per-month').value);
+
+            if (isNaN(goalAmount) || isNaN(monthlySavings) || goalAmount <= 0 || monthlySavings <= 0) {
+                alert('Please enter valid numbers for both fields.');
+                return;
+            }
+
+            const months = Math.ceil(goalAmount / monthlySavings);
+            const years = Math.floor(months / 12);
+            const remainingMonths = months % 12;
+
+            let timeText = '';
+            if (years > 0) {
+                timeText += years + ' year' + (years > 1 ? 's' : '');
+            }
+            if (remainingMonths > 0) {
+                if (years > 0) timeText += ' and ';
+                timeText += remainingMonths + ' month' + (remainingMonths > 1 ? 's' : '');
+            }
+
+            const resultDiv = document.getElementById('savings-result');
+            resultDiv.innerHTML = `
+                <strong>Result:</strong> It will take you <strong>${timeText}</strong> to reach your goal of $${goalAmount.toFixed(2)} 
+                by saving $${monthlySavings.toFixed(2)} per month.
+            `;
+            resultDiv.style.display = 'block';
+        }
+
+        // Detailed savings calculator in the Calculate tab
+        function calculateDetailedSavings() {
+            const goal = parseFloat(document.getElementById('calc-goal').value);
+            const monthly = parseFloat(document.getElementById('calc-monthly').value);
+            const interest = parseFloat(document.getElementById('calc-interest').value) / 100;
+
+            if (isNaN(goal) || isNaN(monthly) || isNaN(interest) || goal <= 0 || monthly <= 0) {
+                alert('Please enter valid numbers for all fields.');
+                return;
+            }
+
+            let balance = 0;
+            let months = 0;
+            let monthlyRate = interest / 12;
+
+            while (balance < goal) {
+                balance = (balance + monthly) * (1 + monthlyRate);
+                months++;
+
+                // Prevent infinite loop
+                if (months > 600) {
+                    break;
+                }
+            }
+
+            const years = Math.floor(months / 12);
+            const remainingMonths = months % 12;
+
+            let timeText = '';
+            if (years > 0) {
+                timeText += years + ' year' + (years > 1 ? 's' : '');
+            }
+            if (remainingMonths > 0) {
+                if (years > 0) timeText += ' and ';
+                timeText += remainingMonths + ' month' + (remainingMonths > 1 ? 's' : '');
+            }
+
+            const totalSaved = monthly * months;
+            const interestEarned = (balance - totalSaved).toFixed(2);
+
+            const resultDiv = document.getElementById('detailed-result');
+            resultDiv.innerHTML = `
+                <strong>Result:</strong> It will take you <strong>${timeText}</strong> to reach your goal of $${goal.toFixed(2)}.<br>
+                You will save a total of $${totalSaved.toFixed(2)} and earn $${interestEarned} in interest.
+            `;
+            resultDiv.style.display = 'block';
+        }
+
+        // Allowance allocation calculator
+        function calculateAllowance() {
+            const allowance = parseFloat(document.getElementById('allowance-amount').value);
+            const savingsPercent = parseFloat(document.getElementById('savings-percent').value);
+
+            if (isNaN(allowance) || isNaN(savingsPercent) || allowance <= 0 || savingsPercent < 0 || savingsPercent > 100) {
+                alert('Please enter valid numbers. Savings percentage must be between 0 and 100.');
+                return;
+            }
+
+            const savingsAmount = (allowance * savingsPercent / 100).toFixed(2);
+            const spendingAmount = (allowance - savingsAmount).toFixed(2);
+
+            const resultDiv = document.getElementById('allowance-result');
+            resultDiv.innerHTML = `
+                <strong>Allowance Allocation:</strong><br>
+                - Savings (${savingsPercent}%): $${savingsAmount}<br>
+                - Spending: $${spendingAmount}<br><br>
+                <strong>Tip:</strong> Consider dividing your spending money into categories like entertainment, snacks, and gifts.
+            `;
+            resultDiv.style.display = 'block';
+        }
+
+        // Goal tracking functionality
+        function addGoal() {
+            const name = document.getElementById('goal-name').value;
+            const target = parseFloat(document.getElementById('goal-target').value);
+            const deadline = document.getElementById('goal-deadline').value;
+
+            if (!name || isNaN(target) || target <= 0 || !deadline) {
+                alert('Please fill all fields with valid values.');
+                return;
+            }
+
+            const goal = {
+                name,
+                target,
+                deadline,
+                saved: 0,
+                id: Date.now() // Unique ID based on timestamp
+            };
+
+            // Save to localStorage
+            let goals = JSON.parse(localStorage.getItem('financialGoals')) || [];
+            goals.push(goal);
+            localStorage.setItem('financialGoals', JSON.stringify(goals));
+
+            // Update UI
+            displayGoals();
+
+            // Clear form
+            document.getElementById('goal-name').value = '';
+            document.getElementById('goal-target').value = '';
+            document.getElementById('goal-deadline').value = '';
+        }
+
+        function displayGoals() {
+            const goalsList = document.getElementById('goals-list');
+            const goals = JSON.parse(localStorage.getItem('financialGoals')) || [];
+
+            if (goals.length === 0) {
+                goalsList.innerHTML = '<p class="text-orange-500 text-center py-4">No goals set yet. Add your first goal above!</p>';
+                return;
+            }
+
+            goalsList.innerHTML = '';
+
+            goals.forEach(goal => {
+                const progress = Math.min(100, (goal.saved / goal.target) * 100);
+                const goalElement = document.createElement('div');
+                goalElement.className = 'mb-4 pb-4 border-b border-orange-200';
+                goalElement.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <h4 class="font-bold">${goal.name}</h4>
+                        <span>$${goal.saved.toFixed(2)} / $${goal.target.toFixed(2)}</span>
+                    </div>
+                    <div class="progress-bar mb-2">
+                        <div class="progress-fill bg-green-500" style="width: ${progress}%"></div>
+                    </div>
+                    <div class="flex justify-between text-sm text-orange-600">
+                        <span>Target: ${new Date(goal.deadline).toLocaleDateString()}</span>
+                        <span>${progress.toFixed(0)}%</span>
+                    </div>
+                    <div class="mt-2 flex space-x-2">
+                        <button class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded" onclick="addToGoal(${goal.id}, 10)">+$10</button>
+                        <button class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded" onclick="addToGoal(${goal.id}, 20)">+$20</button>
+                        <button class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded" onclick="addToGoal(${goal.id}, 50)">+$50</button>
+                    </div>
+                `;
+                goalsList.appendChild(goalElement);
+            });
+        }
+
+        function addToGoal(goalId, amount) {
+            let goals = JSON.parse(localStorage.getItem('financialGoals')) || [];
+            const goalIndex = goals.findIndex(g => g.id === goalId);
+
+            if (goalIndex !== -1) {
+                goals[goalIndex].saved += amount;
+
+                // Don't allow saving more than the target
+                if (goals[goalIndex].saved > goals[goalIndex].target) {
+                    goals[goalIndex].saved = goals[goalIndex].target;
+                }
+
+                localStorage.setItem('financialGoals', JSON.stringify(goals));
+                displayGoals();
+            }
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function () {
+            displayGoals();
+        });
+    </script>
+
+
+
+
+    <!-- ads  -->
+    <div id="ad-anchor-slot"></div>
+
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            alert('Right-click is disabled to protect our content.');
+        });
+
+        // Disable keyboard shortcuts
+        document.onkeydown = function (e) {
+            if (
+                (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c' || e.key === 'i' || e.key === 'j')) ||
+                e.key === 'F12' ||
+                (e.metaKey && e.altKey && e.key === 'i')
+            ) {
+                e.preventDefault();
+                alert('Access to developer tools and source code is disabled to protect our content.');
+                return false;
+            }
+            return true;
+        };
+
+        // Disable text selection
+        document.addEventListener('selectstart', function (e) {
+            e.preventDefault();
+        });
+
+        // Disable drag and drop
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+    </script>
+
+    <script>
+        window.googletag = window.googletag || { cmd: [] };
+        var anchorSlot;
+        googletag.cmd.push(function () {
+            anchorSlot = googletag.defineOutOfPageSlot('/23300646440/Anchortechgrowup', googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR);
+            if (anchorSlot) {
+                anchorSlot.addService(googletag.pubads());
+            }
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+
+
+    <script>
+        (function () {
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("DOM fully loaded.");
+
+                function showRewardedAd() {
+                    if (!window.googletag || !googletag.cmd) {
+                        console.error("Google Ad Manager is not properly initialized.");
+                        return;
+                    }
+                    // reward ads
+                    googletag.cmd.push(function () {
+                        try {
+                            const rewardedSlot = googletag
+                                .defineOutOfPageSlot('/23300646440/Native', googletag.enums.OutOfPageFormat.REWARDED)
+                                .addService(googletag.pubads());
+
+                            googletag.enableServices();
+                            googletag.display(rewardedSlot);
+                            console.log("Attempting to display rewarded ad...");
+
+                            googletag.pubads().addEventListener("rewardedSlotReady", function (evt) {
+                                console.log("Rewarded ad ready.");
+                                evt.makeRewardedVisible();
+                            });
+
+                            googletag.pubads().addEventListener("rewardedSlotClosed", function () {
+                                console.log("Ad closed.");
+                                googletag.destroySlots([rewardedSlot]);
+                            });
+                        } catch (error) {
+                            console.error("Error during ad setup:", error);
+                        }
+                    });
+                }
+
+                // Add 2-second delay before showing the rewarded ad
+                setTimeout(function () {
+                    console.log("2 seconds elapsed, showing rewarded ad...");
+                    showRewardedAd();
+                }, 2000); // 2000 milliseconds = 2 seconds
+            });
+        })();
+    </script>
+
+
+
+
+</body>
+
+</html>

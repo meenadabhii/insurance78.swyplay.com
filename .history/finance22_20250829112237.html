@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart - Basic Finance Education</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+
+    <script>
+        (function () {
+            // Initialize googletag if not already defined
+            window.googletag = window.googletag || { cmd: [] };
+
+            // Ad slot variables
+            let adSlot1, adSlot2, anchorSlot;
+            const refreshInterval = 30000; // 30 seconds - more user-friendly refresh rate
+            let refreshTimer;
+
+            // Function to set up ads
+            function setupAds() {
+                googletag.cmd.push(function () {
+                    // Setup PubAds
+                    const pubads = googletag.pubads();
+                    pubads.enableSingleRequest();
+                    pubads.setCentering(true);
+
+                    // Apply geotargeting if available
+                    if (window.geoTarget) {
+                        pubads.setLocation(window.geoTarget);
+                    }
+
+                    // Define Ad Slots with consistent IDs
+                    adSlot1 = googletag.defineSlot(
+                        '/23300646440/Native',
+                        [[300, 250], [320, 480], [250, 250], [300, 100], 'fluid', [336, 280]],
+                        'ad-slot-1'
+                    ).addService(pubads);
+
+                    adSlot2 = googletag.defineSlot(
+                        '/23300646440/Native',
+                        [[300, 250], [320, 480], [250, 250], [300, 100], 'fluid', [336, 280]],
+                        'ad-slot-2'
+                    ).addService(pubads);
+
+                    // Define anchor ad with proper ID
+                    anchorSlot = googletag.defineOutOfPageSlot(
+                        '/23300646440/Native',
+                        googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR
+                    );
+
+                    if (anchorSlot) {
+                        anchorSlot.addService(pubads);
+                        // Use the correct ID for the anchor ad
+                        anchorSlot.setElementId('ad-anchor-slot');
+                    }
+
+                    // Event listeners for ad loading
+                    pubads.addEventListener('slotRenderEnded', function (event) {
+                        // Handle ad render events if needed
+                        const slotId = event.slot.getSlotElementId();
+                        const isEmpty = event.isEmpty;
+
+                        // Example: hide containers with no ads
+                        if (isEmpty && document.getElementById(slotId)) {
+                            document.getElementById(slotId).style.display = 'none';
+                        }
+                    });
+
+                    // Enable services
+                    googletag.enableServices();
+
+                    // Display ads
+                    try {
+                        if (document.getElementById('ad-slot-1')) {
+                            googletag.display('ad-slot-1');
+                        }
+                        if (document.getElementById('ad-slot-2')) {
+                            googletag.display('ad-slot-2');
+                        }
+                        if (document.getElementById('ad-anchor-slot')) {
+                            googletag.display('ad-anchor-slot');
+                        }
+                    } catch (error) {
+                        console.log('Error displaying ads:', error);
+                    }
+
+                    // Set up periodic refresh with error handling
+                    setupAdRefresh();
+                });
+            }
+
+            // Function to handle ad refresh
+            function setupAdRefresh() {
+                if (refreshTimer) {
+                    clearInterval(refreshTimer);
+                }
+
+                refreshTimer = setInterval(function () {
+                    try {
+                        // Only refresh if slots exist and are defined
+                        const slotsToRefresh = [];
+                        if (adSlot1) slotsToRefresh.push(adSlot1);
+                        if (adSlot2) slotsToRefresh.push(adSlot2);
+
+                        if (slotsToRefresh.length > 0) {
+                            googletag.cmd.push(function () {
+                                googletag.pubads().refresh(slotsToRefresh);
+                            });
+                        }
+                    } catch (error) {
+                        console.log('Error refreshing ads:', error);
+                        clearInterval(refreshTimer); // Stop trying on persistent errors
+                    }
+                }, refreshInterval);
+            }
+
+            // Check for ad blockers (simple detection)
+            function checkAdBlocker() {
+                const testAd = document.createElement('div');
+                testAd.innerHTML = '&nbsp;';
+                testAd.className = 'adsbox';
+                document.body.appendChild(testAd);
+
+                setTimeout(function () {
+                    if (testAd.offsetHeight === 0) {
+                        console.log('Ad blocker detected');
+                        // You can show a message to users or implement fallback content
+                    }
+                    document.body.removeChild(testAd);
+                }, 100);
+            }
+
+            // Initialize ads when DOM is ready
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                setupAds();
+                checkAdBlocker();
+            } else {
+                document.addEventListener('DOMContentLoaded', function () {
+                    setupAds();
+                    checkAdBlocker();
+                });
+            }
+
+            // Clean up on page unload
+            window.addEventListener('beforeunload', function () {
+                if (refreshTimer) {
+                    clearInterval(refreshTimer);
+                }
+            });
+        })();
+
+    </script>
+
+
+    <style>
+        #banner-ad {
+            width: 100%;
+            max-width: 425px;
+            margin: 1rem auto 0.5rem;
+            padding: 0.5rem;
+            background: hsl(240, 6%, 97%);
+            box-shadow: 0 4px 15px var(--shadow-dark);
+            border-radius: 8px;
+            position: relative;
+            text-align: center;
+            border: 1px solid var(--accent-gold);
+        }
+
+        #banner-ad::before {
+            content: "Advertisement";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--accent-gold);
+            background: var(--primary-dark);
+            padding: 0 8px;
+            border-radius: 4px;
+            border: 1px solid var(--accent-gold);
+        }
+
+        .ad-divider {
+            width: 90%;
+            max-width: 425px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 0.5rem auto;
+        }
+    </style>
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .finance-card {
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .finance-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .expandable-content.expanded {
+            max-height: 1000px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #e5e7eb;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .calculator-container {
+            background-color: #f9fafb;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .calculator-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .calculator-result {
+            margin-top: 16px;
+            padding: 12px;
+            background-color: #e6f4ea;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .tab-button {
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-right: 8px;
+            font-weight: 500;
+        }
+
+        .tab-button.active {
+            background-color: #eb8424;
+            color: white;
+        }
+
+        .achievement-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f0f9ff;
+            border-radius: 20px;
+            padding: 6px 12px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .quiz-option {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .quiz-option:hover {
+            border-color: #e4712e;
+        }
+
+        .quiz-option.selected {
+            border-color: #f19d1f;
+            background-color: #dbeafe;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-orange-50 to-indigo-100 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+        <!-- Finance22 Page -->
+        <div>
+            <header
+                class="bg-gradient-to-r from-orange-600 to-teal-700 text-white p-5 flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="finpro.html" class="text-white mr-3">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <h2 class="text-xl font-bold">Basic Finance Education</h2>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-sm mr-2">Level 3</span>
+                    <i class="fas fa-coins text-yellow-300"></i>
+                </div>
+            </header>
+
+            <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                <div id="ad-slot-1" class="ad-container" style="display: block !important;"></div>
+            </div>
+
+            <!-- New Button to open fund.html -->
+            <a href="finpro6.html" class="block">
+                <button
+                    class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-3 rounded-lg font-bold mb-5">
+                    <i class="fas fa-university mr-2"></i> Investment Funds
+                </button>
+            </a>
+            <main class="p-5">
+                <!-- Progress Section -->
+                <div class="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-5">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-bold text-orange-800">Your Progress</h3>
+                        <span class="text-sm text-orange-600">60% Complete</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill bg-orange-500" style="width: 60%"></div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="achievement-badge">
+                            <i class="fas fa-medal text-yellow-500 mr-1"></i> Budget Master
+                        </span>
+                        <span class="achievement-badge">
+                            <i class="fas fa-trophy text-purple-500 mr-1"></i> Savings Beginner
+                        </span>
+                        <span class="achievement-badge">
+                            <i class="fas fa-award text-orange-500 mr-1"></i> Finance Explorer
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Tabs Navigation -->
+                <div class="flex mb-5 bg-gray-100 p-1 rounded-lg">
+                    <div class="tab-button active" onclick="switchTab('learn')">Learn</div>
+                    <div class="tab-button" onclick="switchTab('calculate')">Calculate</div>
+                    <div class="tab-button" onclick="switchTab('quiz')">Quiz</div>
+                </div>
+
+                <!-- Learn Tab Content -->
+                <div id="learn-tab">
+                    <div class="finance-card bg-white border border-gray-200 p-5 mb-5">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-orange-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-money-bill-wave text-orange-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Budgeting Basics</h3>
+                        </div>
+                        <p class="text-gray-700 mb-3">Learn how to create and maintain a budget to manage your money
+                            effectively.</p>
+                        <div class="expandable-content" id="budgeting-content">
+                            <div class="bg-gray-100 p-3 rounded-lg mb-3">
+                                <h4 class="font-bold mb-2">Creating a Budget:</h4>
+                                <ul class="text-sm list-disc pl-5">
+                                    <li class="mb-1">Track your income from all sources</li>
+                                    <li class="mb-1">Categorize your expenses (needs vs. wants)</li>
+                                    <li class="mb-1">Set spending limits for each category</li>
+                                    <li class="mb-1">Review and adjust your budget regularly</li>
+                                    <li>Use the 50/30/20 rule: 50% needs, 30% wants, 20% savings</li>
+                                </ul>
+                            </div>
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-3">
+                                <p class="text-sm text-yellow-700">
+                                    <i class="fas fa-lightbulb mr-1"></i> <strong>Pro Tip:</strong> Always pay yourself
+                                    first by allocating money to savings before spending on wants.
+                                </p>
+                            </div>
+                        </div>
+                        <button
+                            class="btn-primary bg-orange-600 hover:bg-orange-700 text-white w-full py-2 rounded-lg font-bold"
+                            onclick="toggleExpand('budgeting-content')">
+                            Learn More
+                        </button>
+                    </div>
+
+                    <div class="finance-card bg-white border border-gray-200 p-5 mb-5">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-orange-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-piggy-bank text-orange-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Saving & Investing</h3>
+                        </div>
+                        <p class="text-gray-700 mb-3">Understand the difference between saving and investing and how to
+                            make your money grow.</p>
+                        <div class="expandable-content" id="savings-content">
+                            <div class="bg-gray-100 p-3 rounded-lg mb-3">
+                                <h4 class="font-bold mb-2">Saving vs. Investing:</h4>
+                                <ul class="text-sm list-disc pl-5">
+                                    <li class="mb-1"><strong>Saving</strong>: Preserving money for short-term goals with
+                                        minimal risk</li>
+                                    <li class="mb-1"><strong>Investing</strong>: Putting money to work for long-term
+                                        growth with higher potential returns</li>
+                                    <li class="mb-1">Start with an emergency fund (3-6 months of expenses)</li>
+                                    <li>Consider low-risk investments like index funds for beginners</li>
+                                </ul>
+                            </div>
+                            <div class="calculator-container">
+                                <h4 class="font-bold mb-2">Compound Interest Calculator</h4>
+                                <p class="text-sm mb-3">See how your money can grow over time</p>
+                                <input type="number" id="principal-amount" class="calculator-input"
+                                    placeholder="Initial Amount ($)">
+                                <input type="number" id="monthly-contribution" class="calculator-input"
+                                    placeholder="Monthly Contribution ($)">
+                                <input type="number" id="interest-rate" class="calculator-input"
+                                    placeholder="Annual Interest Rate (%)" value="7">
+                                <input type="number" id="years-growth" class="calculator-input"
+                                    placeholder="Years to Grow" value="10">
+                                <button
+                                    class="btn-primary bg-orange-600 hover:bg-orange-700 text-white w-full py-2 rounded-lg font-bold"
+                                    onclick="calculateCompoundInterest()">
+                                    Calculate
+                                </button>
+                                <div id="compound-result" class="calculator-result"></div>
+                            </div>
+                        </div>
+                        <button
+                            class="btn-primary bg-orange-600 hover:bg-orange-700 text-white w-full py-2 rounded-lg font-bold"
+                            onclick="toggleExpand('savings-content')">
+                            Learn More
+                        </button>
+                    </div>
+                    <!-- Navigation Button -->
+                    <a href="finpro.html" class="block">
+                        <button
+                            class="btn-orange bg-teal-600 hover:bg-teal-700 text-white w-full py-3 rounded-lg font-bold mb-5"
+                            style="background-color: rgb(230, 134, 24) !important;">
+                            <i class="fas fa-arrow-left mr-2"></i> Back to finance
+                        </button>
+                    </a
+
+                    <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                        <div id="ad-slot-2" class="ad-container" style="display: block !important;"></div>
+                    </div>
+
+
+                    <div class="finance-card bg-white border border-gray-200 p-5 mb-5">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-purple-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-credit-card text-purple-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Credit & Debt Management</h3>
+                        </div>
+                        <p class="text-gray-700 mb-3">Learn how credit works, how to build good credit, and how to
+                            manage debt responsibly.</p>
+                        <div class="expandable-content" id="credit-content">
+                            <div class="bg-gray-100 p-3 rounded-lg mb-3">
+                                <h4 class="font-bold mb-2">Understanding Credit:</h4>
+                                <ul class="text-sm list-disc pl-5">
+                                    <li class="mb-1">Credit score ranges from 300-850 (higher is better)</li>
+                                    <li class="mb-1">Factors affecting credit: payment history, credit utilization,
+                                        length of history</li>
+                                    <li class="mb-1">Build credit with a secured credit card or becoming an authorized
+                                        user</li>
+                                    <li>Always pay credit card balances in full to avoid interest</li>
+                                </ul>
+                            </div>
+                            <div class="bg-orange-50 border-l-4 border-orange-400 p-3">
+                                <p class="text-sm text-orange-700">
+                                    <i class="fas fa-info-circle mr-1"></i> <strong>Did You Know?</strong> Your credit
+                                    score can affect your ability to rent an apartment, get a cell phone plan, or even
+                                    get certain jobs.
+                                </p>
+                            </div>
+                        </div>
+                        <button
+                            class="btn-primary bg-purple-600 hover:bg-purple-700 text-white w-full py-2 rounded-lg font-bold"
+                            onclick="toggleExpand('credit-content')">
+                            Learn More
+                        </button>
+                    </div>
+
+                    <div class="finance-card bg-white border border-gray-200 p-5 mb-5">
+                        <div class="flex items-center mb-3">
+                            <div class="bg-red-100 p-2 rounded-full mr-3">
+                                <i class="fas fa-shield-alt text-red-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Financial Safety</h3>
+                        </div>
+                        <p class="text-gray-700 mb-3">Protect yourself from financial fraud and learn about insurance
+                            basics.</p>
+                        <div class="expandable-content" id="safety-content">
+                            <div class="bg-gray-100 p-3 rounded-lg mb-3">
+                                <h4 class="font-bold mb-2">Staying Financially Safe:</h4>
+                                <ul class="text-sm list-disc pl-5">
+                                    <li class="mb-1">Never share passwords or PINs with anyone</li>
+                                    <li class="mb-1">Be cautious of phishing emails and suspicious links</li>
+                                    <li class="mb-1">Monitor your accounts regularly for unauthorized transactions</li>
+                                    <li class="mb-1">Use strong, unique passwords for financial accounts</li>
+                                    <li>Understand basic insurance types: health, auto, renter's/homeowner's</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button
+                            class="btn-orange bg-orange-600 hover:bg-orange-700 text-white w-full py-2 rounded-lg font-bold"
+                            onclick="toggleExpand('safety-content')">
+                            Learn More
+                        </button>
+                    </div>
+
+
+                </div>
+               
+                <!-- Calculate Tab Content (Hidden by Default) -->
+                <div id="calculate-tab" class="hidden">
+                    <div class="finance-card bg-white border border-gray-200 p-5 mb-5">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Compound Interest Calculator</h3>
+                        <p class="text-gray-700 mb-3">See how your money can grow over time with compound interest.</p>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="calc-principal">
+                                Initial Investment ($)
+                            </label>
+                            <input class="calculator-input" id="calc-principal" type="number"
+                                placeholder="Example: 1000">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="calc-monthly">
+                                Monthly Contribution ($)
+                            </label>
+                            <input class="calculator-input" id="calc-monthly" type="number" placeholder="Example: 100">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="calc-interest">
+                                Annual Interest Rate (%)
+                            </label>
+                            <input class="calculator-input" id="calc-interest" type="number" placeholder="Example: 7"
+                                value="7">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="calc-years">
+                                Years to Grow
+                            </label>
+                            <input class="calculator-input" id="calc-years" type="number" placeholder="Example: 10"
+                                value="10">
+                        </div>
+
+                        <button
+                            class="btn-primary bg-orange-600 hover:bg-orange-700 text-white w-full py-2 rounded-lg font-bold mb-3"
+                            onclick="calculateDetailedCompoundInterest()">
+                            Calculate
+                        </button>
+
+                        <div id="detailed-compound-result" class="calculator-result"></div>
+                    </div>
+
+                    <div class="finance-card bg-white border border-gray-200 p-5">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Debt Payoff Calculator</h3>
+                        <p class="text-gray-700 mb-3">Calculate how long it will take to pay off your debt.</p>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="debt-amount">
+                                Debt Amount ($)
+                            </label>
+                            <input class="calculator-input" id="debt-amount" type="number" placeholder="Example: 5000">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="debt-interest">
+                                Annual Interest Rate (%)
+                            </label>
+                            <input class="calculator-input" id="debt-interest" type="number" placeholder="Example: 18"
+                                value="18">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="monthly-payment">
+                                Monthly Payment ($)
+                            </label>
+                            <input class="calculator-input" id="monthly-payment" type="number"
+                                placeholder="Example: 200">
+                        </div>
+
+                        <button
+                            class="btn-primary bg-orange-600 hover:bg-orange-700 text-white w-full py-2 rounded-lg font-bold mb-3"
+                            onclick="calculateDebtPayoff()">
+                            Calculate Payoff Time
+                        </button>
+
+                        <div id="debt-result" class="calculator-result"></div>
+                    </div>
+                </div>
+
+                <!-- Quiz Tab Content (Hidden by Default) -->
+                <div id="quiz-tab" class="hidden">
+                    <div class="finance-card bg-white border border-gray-200 p-5 mb-5">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Financial Knowledge Quiz</h3>
+                        <p class="text-gray-700 mb-3">Test your understanding of basic financial concepts.</p>
+
+                        <div id="quiz-container">
+                            <div class="quiz-question active">
+                                <h4 class="font-bold mb-3">Question 1: What is the purpose of a budget?</h4>
+                                <div class="quiz-option" onclick="selectOption(this)">To restrict spending completely
+                                </div>
+                                <div class="quiz-option" onclick="selectOption(this)">To plan and manage income and
+                                    expenses</div>
+                                <div class="quiz-option" onclick="selectOption(this)">To track only large purchases
+                                </div>
+                                <div class="quiz-option" onclick="selectOption(this)">To help you spend more money</div>
+                            </div>
+
+                            <div class="quiz-question hidden">
+                                <h4 class="font-bold mb-3">Question 2: What is compound interest?</h4>
+                                <div class="quiz-option" onclick="selectOption(this)">Interest charged on loans only
+                                </div>
+                                <div class="quiz-option" onclick="selectOption(this)">Interest calculated only on the
+                                    initial principal</div>
+                                <div class="quiz-option" onclick="selectOption(this)">Interest earned on both the
+                                    initial principal and accumulated interest</div>
+                                <div class="quiz-option" onclick="selectOption(this)">A penalty for early withdrawal
+                                    from savings</div>
+                            </div>
+
+                            <div class="quiz-question hidden">
+                                <h4 class="font-bold mb-3">Question 3: What does a credit score measure?</h4>
+                                <div class="quiz-option" onclick="selectOption(this)">Your income level</div>
+                                <div class="quiz-option" onclick="selectOption(this)">Your likelihood to repay borrowed
+                                    money</div>
+                                <div class="quiz-option" onclick="selectOption(this)">The amount of money in your
+                                    savings account</div>
+                                <div class="quiz-option" onclick="selectOption(this)">Your financial knowledge</div>
+                            </div>
+
+                            <div class="flex justify-between mt-4">
+                                <button class="bg-gray-300 text-gray-700 py-2 px-4 rounded-lg font-bold"
+                                    onclick="prevQuestion()" id="prev-btn" disabled>
+                                    Previous
+                                </button>
+                                <button class="bg-orange-600 text-white py-2 px-4 rounded-lg font-bold"
+                                    onclick="nextQuestion()" id="next-btn">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="quiz-result" class="calculator-result hidden">
+                            <h4 class="font-bold mb-2">Quiz Results</h4>
+                            <p>You scored <span id="score">0</span> out of 3!</p>
+                            <button class="bg-orange-600 text-white py-2 px-4 rounded-lg font-bold mt-3 w-full"
+                                onclick="resetQuiz()">
+                                Try Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Expandable content
+        function toggleExpand(contentId) {
+            const content = document.getElementById(contentId);
+
+            content.classList.toggle('expanded');
+
+            // If it's a button with "Learn More" text, change it to "Show Less"
+            const event = window.event;
+            if (event && event.target && event.target.tagName === 'BUTTON') {
+                if (content.classList.contains('expanded')) {
+                    event.target.textContent = 'Show Less';
+                } else {
+                    event.target.textContent = 'Learn More';
+                }
+            }
+        }
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.getElementById('learn-tab').classList.add('hidden');
+            document.getElementById('calculate-tab').classList.add('hidden');
+            document.getElementById('quiz-tab').classList.add('hidden');
+
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.remove('hidden');
+
+            // Update tab buttons
+            const tabs = document.querySelectorAll('.tab-button');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            event.currentTarget.classList.add('active');
+        }
+
+        // Compound interest calculator in the savings section
+        function calculateCompoundInterest() {
+            const principal = parseFloat(document.getElementById('principal-amount').value) || 0;
+            const monthly = parseFloat(document.getElementById('monthly-contribution').value) || 0;
+            const interest = parseFloat(document.getElementById('interest-rate').value) || 0;
+            const years = parseFloat(document.getElementById('years-growth').value) || 0;
+
+            if (interest <= 0 || years <= 0) {
+                alert('Please enter valid numbers for interest rate and years.');
+                return;
+            }
+
+            const monthlyRate = interest / 100 / 12;
+            const months = years * 12;
+            let total = principal;
+
+            for (let i = 0; i < months; i++) {
+                total = (total + monthly) * (1 + monthlyRate);
+            }
+
+            const totalContributions = principal + (monthly * months);
+            const interestEarned = total - totalContributions;
+
+            const resultDiv = document.getElementById('compound-result');
+            resultDiv.innerHTML = `
+                <strong>Result:</strong> After ${years} years, your investment will grow to <strong>$${total.toFixed(2)}</strong>.<br>
+                You will have contributed $${totalContributions.toFixed(2)} and earned $${interestEarned.toFixed(2)} in interest.
+            `;
+            resultDiv.style.display = 'block';
+        }
+
+        // Detailed compound interest calculator in the Calculate tab
+        function calculateDetailedCompoundInterest() {
+            const principal = parseFloat(document.getElementById('calc-principal').value) || 0;
+            const monthly = parseFloat(document.getElementById('calc-monthly').value) || 0;
+            const interest = parseFloat(document.getElementById('calc-interest').value) || 0;
+            const years = parseFloat(document.getElementById('calc-years').value) || 0;
+
+            if (interest <= 0 || years <= 0) {
+                alert('Please enter valid numbers for interest rate and years.');
+                return;
+            }
+
+            const monthlyRate = interest / 100 / 12;
+            const months = years * 12;
+            let total = principal;
+
+            for (let i = 0; i < months; i++) {
+                total = (total + monthly) * (1 + monthlyRate);
+            }
+
+            const totalContributions = principal + (monthly * months);
+            const interestEarned = total - totalContributions;
+
+            const resultDiv = document.getElementById('detailed-compound-result');
+            resultDiv.innerHTML = `
+                <strong>Projection:</strong> After ${years} years at ${interest}% annual interest:<br>
+                - Final Balance: <strong>$${total.toFixed(2)}</strong><br>
+                - Total Contributions: $${totalContributions.toFixed(2)}<br>
+                - Interest Earned: $${interestEarned.toFixed(2)}<br>
+                - Effective Annual Return: ${((total / totalContributions) ** (1 / years) - 1).toFixed(2) * 100}%
+            `;
+            resultDiv.style.display = 'block';
+        }
+
+        // Debt payoff calculator
+        function calculateDebtPayoff() {
+            const debtAmount = parseFloat(document.getElementById('debt-amount').value);
+            const interestRate = parseFloat(document.getElementById('debt-interest').value);
+            const monthlyPayment = parseFloat(document.getElementById('monthly-payment').value);
+
+            if (isNaN(debtAmount) || isNaN(interestRate) || isNaN(monthlyPayment) ||
+                debtAmount <= 0 || interestRate < 0 || monthlyPayment <= 0) {
+                alert('Please enter valid numbers for all fields.');
+                return;
+            }
+
+            if (monthlyPayment <= debtAmount * (interestRate / 100 / 12)) {
+                alert('Your monthly payment is too low to pay off the debt. Please increase your payment amount.');
+                return;
+            }
+
+            const monthlyRate = interestRate / 100 / 12;
+            let balance = debtAmount;
+            let months = 0;
+            let totalInterest = 0;
+
+            while (balance > 0) {
+                const interest = balance * monthlyRate;
+                const principalPayment = monthlyPayment - interest;
+
+                balance -= principalPayment;
+                totalInterest += interest;
+                months++;
+
+                // Prevent infinite loop
+                if (months > 600) {
+                    break;
+                }
+            }
+
+            const years = Math.floor(months / 12);
+            const remainingMonths = months % 12;
+
+            let timeText = '';
+            if (years > 0) {
+                timeText += years + ' year' + (years > 1 ? 's' : '');
+            }
+            if (remainingMonths > 0) {
+                if (years > 0) timeText += ' and ';
+                timeText += remainingMonths + ' month' + (remainingMonths > 1 ? 's' : '');
+            }
+
+            const resultDiv = document.getElementById('debt-result');
+            resultDiv.innerHTML = `
+                <strong>Payoff Timeline:</strong> It will take <strong>${timeText}</strong> to pay off your debt.<br>
+                Total interest paid: $${totalInterest.toFixed(2)}<br>
+                Total amount paid: $${(debtAmount + totalInterest).toFixed(2)}
+            `;
+            resultDiv.style.display = 'block';
+        }
+
+        // Quiz functionality
+        let currentQuestion = 0;
+        const correctAnswers = [1, 2, 1]; // Index of correct answers for each question
+        const userAnswers = [-1, -1, -1]; // Initialize with no answers
+
+        function selectOption(element) {
+            // Remove selected class from all options in this question
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+
+            // Add selected class to clicked option
+            element.classList.add('selected');
+
+            // Store the answer
+            const optionIndex = Array.from(options).indexOf(element);
+            userAnswers[currentQuestion] = optionIndex;
+        }
+
+        function nextQuestion() {
+            if (userAnswers[currentQuestion] === -1) {
+                alert('Please select an answer before proceeding.');
+                return;
+            }
+
+            // Hide current question
+            document.querySelectorAll('.quiz-question')[currentQuestion].classList.add('hidden');
+
+            // Show next question or results
+            if (currentQuestion < 2) {
+                currentQuestion++;
+                document.querySelectorAll('.quiz-question')[currentQuestion].classList.remove('hidden');
+
+                // Update buttons
+                document.getElementById('prev-btn').disabled = false;
+
+                if (currentQuestion === 2) {
+                    document.getElementById('next-btn').textContent = 'Finish Quiz';
+                }
+            } else {
+                // Calculate score
+                let score = 0;
+                for (let i = 0; i < 3; i++) {
+                    if (userAnswers[i] === correctAnswers[i]) {
+                        score++;
+                    }
+                }
+
+                // Show results
+                document.getElementById('quiz-container').classList.add('hidden');
+                document.getElementById('quiz-result').classList.remove('hidden');
+                document.getElementById('score').textContent = score;
+            }
+        }
+
+        function prevQuestion() {
+            // Hide current question
+            document.querySelectorAll('.quiz-question')[currentQuestion].classList.add('hidden');
+
+            // Show previous question
+            currentQuestion--;
+            document.querySelectorAll('.quiz-question')[currentQuestion].classList.remove('hidden');
+
+            // Update buttons
+            if (currentQuestion === 0) {
+                document.getElementById('prev-btn').disabled = true;
+            }
+
+            document.getElementById('next-btn').textContent = 'Next';
+        }
+
+        function resetQuiz() {
+            // Reset quiz state
+            currentQuestion = 0;
+            for (let i = 0; i < 3; i++) {
+                userAnswers[i] = -1;
+            }
+
+            // Reset UI
+            document.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+
+            document.querySelectorAll('.quiz-question').forEach((q, i) => {
+                q.classList.add('hidden');
+                if (i === 0) {
+                    q.classList.remove('hidden');
+                }
+            });
+
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('prev-btn').disabled = true;
+            document.getElementById('next-btn').textContent = 'Next';
+        }
+    </script>
+
+
+    <!-- ads  -->
+    <div id="ad-anchor-slot"></div>
+
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            alert('Right-click is disabled to protect our content.');
+        });
+
+        // Disable keyboard shortcuts
+        document.onkeydown = function (e) {
+            if (
+                (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c' || e.key === 'i' || e.key === 'j')) ||
+                e.key === 'F12' ||
+                (e.metaKey && e.altKey && e.key === 'i')
+            ) {
+                e.preventDefault();
+                alert('Access to developer tools and source code is disabled to protect our content.');
+                return false;
+            }
+            return true;
+        };
+
+        // Disable text selection
+        document.addEventListener('selectstart', function (e) {
+            e.preventDefault();
+        });
+
+        // Disable drag and drop
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+    </script>
+
+    <script>
+        window.googletag = window.googletag || { cmd: [] };
+        var anchorSlot;
+        googletag.cmd.push(function () {
+            anchorSlot = googletag.defineOutOfPageSlot('/23293093930/anchor', googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR);
+            if (anchorSlot) {
+                anchorSlot.addService(googletag.pubads());
+            }
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+
+    <script>
+        (function () {
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("DOM fully loaded.");
+
+                function showRewardedAd() {
+                    if (!window.googletag || !googletag.cmd) {
+                        console.error("Google Ad Manager is not properly initialized.");
+                        return;
+                    }
+                    // reward ads
+                    googletag.cmd.push(function () {
+                        try {
+                            const rewardedSlot = googletag
+                                .defineOutOfPageSlot('/23300646440/Native', googletag.enums.OutOfPageFormat.REWARDED)
+                                .addService(googletag.pubads());
+
+                            googletag.enableServices();
+                            googletag.display(rewardedSlot);
+                            console.log("Attempting to display rewarded ad...");
+
+                            googletag.pubads().addEventListener("rewardedSlotReady", function (evt) {
+                                console.log("Rewarded ad ready.");
+                                evt.makeRewardedVisible();
+                            });
+
+                            googletag.pubads().addEventListener("rewardedSlotClosed", function () {
+                                console.log("Ad closed.");
+                                googletag.destroySlots([rewardedSlot]);
+                            });
+                        } catch (error) {
+                            console.error("Error during ad setup:", error);
+                        }
+                    });
+                }
+
+                // Add 2-second delay before showing the rewarded ad
+                setTimeout(function () {
+                    console.log("2 seconds elapsed, showing rewarded ad...");
+                    showRewardedAd();
+                }, 2000); // 2000 milliseconds = 2 seconds
+            });
+        })();
+    </script>
+
+
+
+</body>
+
+</html>

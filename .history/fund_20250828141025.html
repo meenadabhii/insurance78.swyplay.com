@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart - Investment Funds Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+
+    <script>
+        (function () {
+            // Initialize googletag if not already defined
+            window.googletag = window.googletag || { cmd: [] };
+
+            // Ad slot variables
+            let adSlot1, adSlot2, anchorSlot;
+            const refreshInterval = 30000; // 30 seconds - more user-friendly refresh rate
+            let refreshTimer;
+
+            // Function to set up ads
+            function setupAds() {
+                googletag.cmd.push(function () {
+                    // Setup PubAds
+                    const pubads = googletag.pubads();
+                    pubads.enableSingleRequest();
+                    pubads.setCentering(true);
+
+                    // Apply geotargeting if available
+                    if (window.geoTarget) {
+                        pubads.setLocation(window.geoTarget);
+                    }
+
+                    // Define Ad Slots with consistent IDs
+                    adSlot1 = googletag.defineSlot(
+                        '/23300646440/Native',
+                        [[300, 250], [320, 480], [250, 250], [300, 100], 'fluid', [336, 280]],
+                        'ad-slot-1'
+                    ).addService(pubads);
+
+                    adSlot2 = googletag.defineSlot(
+                        '/23300646440/Native',
+                        [[300, 250], [320, 480], [250, 250], [300, 100], 'fluid', [336, 280]],
+                        'ad-slot-2'
+                    ).addService(pubads);
+
+                    // Define anchor ad with proper ID
+                    anchorSlot = googletag.defineOutOfPageSlot(
+                        '/23300646440/Native',
+                        googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR
+                    );
+
+                    if (anchorSlot) {
+                        anchorSlot.addService(pubads);
+                        // Use the correct ID for the anchor ad
+                        anchorSlot.setElementId('ad-anchor-slot');
+                    }
+
+                    // Event listeners for ad loading
+                    pubads.addEventListener('slotRenderEnded', function (event) {
+                        // Handle ad render events if needed
+                        const slotId = event.slot.getSlotElementId();
+                        const isEmpty = event.isEmpty;
+
+                        // Example: hide containers with no ads
+                        if (isEmpty && document.getElementById(slotId)) {
+                            document.getElementById(slotId).style.display = 'none';
+                        }
+                    });
+
+                    // Enable services
+                    googletag.enableServices();
+
+                    // Display ads
+                    try {
+                        if (document.getElementById('ad-slot-1')) {
+                            googletag.display('ad-slot-1');
+                        }
+                        if (document.getElementById('ad-slot-2')) {
+                            googletag.display('ad-slot-2');
+                        }
+                        if (document.getElementById('ad-anchor-slot')) {
+                            googletag.display('ad-anchor-slot');
+                        }
+                    } catch (error) {
+                        console.log('Error displaying ads:', error);
+                    }
+
+                    // Set up periodic refresh with error handling
+                    setupAdRefresh();
+                });
+            }
+
+            // Function to handle ad refresh
+            function setupAdRefresh() {
+                if (refreshTimer) {
+                    clearInterval(refreshTimer);
+                }
+
+                refreshTimer = setInterval(function () {
+                    try {
+                        // Only refresh if slots exist and are defined
+                        const slotsToRefresh = [];
+                        if (adSlot1) slotsToRefresh.push(adSlot1);
+                        if (adSlot2) slotsToRefresh.push(adSlot2);
+
+                        if (slotsToRefresh.length > 0) {
+                            googletag.cmd.push(function () {
+                                googletag.pubads().refresh(slotsToRefresh);
+                            });
+                        }
+                    } catch (error) {
+                        console.log('Error refreshing ads:', error);
+                        clearInterval(refreshTimer); // Stop trying on persistent errors
+                    }
+                }, refreshInterval);
+            }
+
+            // Check for ad blockers (simple detection)
+            function checkAdBlocker() {
+                const testAd = document.createElement('div');
+                testAd.innerHTML = '&nbsp;';
+                testAd.className = 'adsbox';
+                document.body.appendChild(testAd);
+
+                setTimeout(function () {
+                    if (testAd.offsetHeight === 0) {
+                        console.log('Ad blocker detected');
+                        // You can show a message to users or implement fallback content
+                    }
+                    document.body.removeChild(testAd);
+                }, 100);
+            }
+
+            // Initialize ads when DOM is ready
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                setupAds();
+                checkAdBlocker();
+            } else {
+                document.addEventListener('DOMContentLoaded', function () {
+                    setupAds();
+                    checkAdBlocker();
+                });
+            }
+
+            // Clean up on page unload
+            window.addEventListener('beforeunload', function () {
+                if (refreshTimer) {
+                    clearInterval(refreshTimer);
+                }
+            });
+        })();
+
+    </script>
+
+
+    <style>
+        #banner-ad {
+            width: 100%;
+            max-width: 425px;
+            margin: 1rem auto 0.5rem;
+            padding: 0.5rem;
+            background: hsl(240, 6%, 97%);
+            box-shadow: 0 4px 15px var(--shadow-dark);
+            border-radius: 8px;
+            position: relative;
+            text-align: center;
+            border: 1px solid var(--accent-gold);
+        }
+
+        #banner-ad::before {
+            content: "Advertisement";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--accent-gold);
+            background: var(--primary-dark);
+            padding: 0 8px;
+            border-radius: 4px;
+            border: 1px solid var(--accent-gold);
+        }
+
+        .ad-divider {
+            width: 90%;
+            max-width: 425px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            margin: 0.5rem auto;
+        }
+    </style>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            box-shadow: 0 4px 6px rgba(255, 138, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(255, 138, 0, 0.4);
+        }
+
+        .finance-card {
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .finance-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .expandable-content.expanded {
+            max-height: 1000px;
+        }
+
+        .calculator-form {
+            background: linear-gradient(135deg, #fef3e8 0%, #fde6d2 100%);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 5px;
+            background: #ffedd5;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #f97316;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .fund-type {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .fund-type:hover {
+            border-left: 4px solid #f97316;
+            background-color: #fff7ed;
+        }
+
+        .progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: #e5e7eb;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #f97316 0%, #fb923c 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-orange-50 to-orange-100 min-h-screen p-4">
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+        <header class="bg-orange-500 text-white p-5 flex items-center">
+            <a href="fin24.html" class="text-white mr-3">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <h2 class="text-xl font-bold">Investment Funds Explorer</h2>
+        </header>
+
+        <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+            <div id="ad-slot-1" class="ad-container" style="display: block !important;"></div>
+        </div>
+        <main class="p-5">
+            <!-- Introduction -->
+            <div class="bg-orange-50 p-4 rounded-xl mb-6 border border-orange-200">
+                <h2 class="text-2xl font-bold text-orange-700 mb-2">Understanding Investment Funds</h2>
+                <p class="text-gray-700">Investment funds pool money from many investors to purchase a diversified
+                    portfolio of stocks, bonds, or other securities. This allows individual investors to access
+                    professionally managed, diversified portfolios with relatively small amounts of money.</p>
+            </div>
+
+
+            <!-- New Button to open fund.html -->
+            <a href="insurance.html" class="block">
+                <button
+                    class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-3 rounded-lg font-bold mb-5">
+                    <i class="fas fa-university mr-2"></i>Investment
+                </button>
+            </a>
+            <!-- Fund Comparison -->
+            <div class="finance-card bg-white border border-orange-200 p-5 mb-6">
+                <h3 class="text-xl font-bold text-orange-600 mb-4">Types of Investment Funds</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+                    <div class="fund-type p-4 border border-orange-100 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-chart-line text-blue-500"></i>
+                            </div>
+                            <h4 class="font-bold">Mutual Funds</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">Professionally managed investment funds that pool money
+                            from many investors to purchase securities.</p>
+                        <div class="text-xs">
+                            <span
+                                class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Diversification</span>
+                            <span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Professional
+                                Management</span>
+                        </div>
+                    </div>
+
+                    <div class="fund-type p-4 border border-orange-100 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-exchange-alt text-green-500"></i>
+                            </div>
+                            <h4 class="font-bold">ETFs</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">Exchange-Traded Funds track an index and trade like stocks
+                            throughout the trading day.</p>
+                        <div class="text-xs">
+                            <span class="inline-block bg-green-100 text-green-800 px-2 py-1 rounded-full">Low Expense
+                                Ratios</span>
+                            <span class="inline-block bg-green-100 text-green-800 px-2 py-1 rounded-full">Intraday
+                                Trading</span>
+                        </div>
+                    </div>
+
+                    <div class="fund-type p-4 border border-orange-100 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-balance-scale text-purple-500"></i>
+                            </div>
+                            <h4 class="font-bold">Index Funds</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">Designed to track the components of a market index like
+                            the S&P 500.</p>
+                        <div class="text-xs">
+                            <span class="inline-block bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Passive
+                                Management</span>
+                            <span class="inline-block bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Low
+                                Fees</span>
+                        </div>
+                    </div>
+
+                    <div class="fund-type p-4 border border-orange-100 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                                <i class="fas fa-hand-holding-usd text-red-500"></i>
+                            </div>
+                            <h4 class="font-bold">Bond Funds</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-2">Invest primarily in bonds and other debt instruments for
+                            regular income.</p>
+                        <div class="text-xs">
+                            <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded-full">Income
+                                Generation</span>
+                            <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded-full">Lower Risk</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                <div id="ad-slot-2" class="ad-container" style="display: block !important;"></div>
+            </div>
+
+
+            <!-- Investment Calculator -->
+            <div class="finance-card bg-white border border-orange-200 p-5 mb-6">
+                <h3 class="text-xl font-bold text-orange-600 mb-4">Investment Growth Calculator</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="calculator-form">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Initial Investment ($)</label>
+                            <input type="range" min="1000" max="100000" value="10000" class="w-full mb-2"
+                                id="initialInvestment">
+                            <div class="flex justify-between">
+                                <span class="text-xs text-gray-500">$1,000</span>
+                                <span class="text-xs text-gray-500" id="initialInvestmentValue">$10,000</span>
+                                <span class="text-xs text-gray-500">$100,000</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Monthly Contribution ($)</label>
+                            <input type="range" min="0" max="5000" value="200" class="w-full mb-2"
+                                id="monthlyContribution">
+                            <div class="flex justify-between">
+                                <span class="text-xs text-gray-500">$0</span>
+                                <span class="text-xs text-gray-500" id="monthlyContributionValue">$200</span>
+                                <span class="text-xs text-gray-500">$5,000</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Annual Return Rate (%)</label>
+                            <input type="range" min="1" max="20" value="7" step="0.5" class="w-full mb-2"
+                                id="returnRate">
+                            <div class="flex justify-between">
+                                <span class="text-xs text-gray-500">1%</span>
+                                <span class="text-xs text-gray-500" id="returnRateValue">7%</span>
+                                <span class="text-xs text-gray-500">20%</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Investment Period
+                                (Years)</label>
+                            <input type="range" min="1" max="40" value="20" class="w-full mb-2" id="investmentPeriod">
+                            <div class="flex justify-between">
+                                <span class="text-xs text-gray-500">1 year</span>
+                                <span class="text-xs text-gray-500" id="investmentPeriodValue">20 years</span>
+                                <span class="text-xs text-gray-500">40 years</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-box flex flex-col justify-center">
+                        <h4 class="font-bold text-lg text-center mb-4">Projected Investment Growth</h4>
+                        <div class="text-center mb-4">
+                            <div class="text-3xl font-bold text-orange-600" id="finalValue">$98,358</div>
+                            <p class="text-sm text-gray-600">Total Value after <span id="yearsResult">20</span> years
+                            </p>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Total Invested:</span>
+                                <span id="totalInvested">$58,000</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Interest Earned:</span>
+                                <span id="interestEarned">$40,358</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%"></div>
+                            </div>
+                        </div>
+
+                        <button
+                            class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold mt-4"
+                            onclick="calculateInvestment()">
+                            Calculate Again
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Risk Assessment -->
+            <div class="finance-card bg-white border border-orange-200 p-5 mb-6">
+                <h3 class="text-xl font-bold text-orange-600 mb-4">Risk Assessment Calculator</h3>
+
+                <div class="bg-orange-50 p-4 rounded-lg mb-4">
+                    <p class="text-sm text-gray-700 mb-3">Answer these questions to assess your risk tolerance and get
+                        fund recommendations.</p>
+
+                    <div class="mb-4">
+                        <p class="font-medium mb-2">1. What is your investment time horizon?</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="risk-answer bg-white border border-orange-200 px-3 py-2 rounded-lg text-sm"
+                                data-score="1">Less than 2 years</button>
+                            <button class="risk-answer bg-white border border-orange-200 px-3 py-2 rounded-lg text-sm"
+                                data-score="2">2-5 years</button>
+                            <button class="risk-answer bg-white border border-orange-200 px-3 py-2 rounded-lg text-sm"
+                                data-score="3">5-10 years</button>
+                            <button class="risk-answer bg-white border border-orange-200 px-3 py-2 rounded-lg text-sm"
+                                data-score="4">More than 10 years</button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="font-medium mb-2">2. How would you react to a 20% market decline?</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="risk-answer bg-white border border-orange-200 px-3 py-2 rounded-lg text-sm"
+                                data-score="1">Sell all investments</button>
+                            <button class="risk-answer bg-white border border-orange-200 px-3 py-2 rounded-lg text-sm"
+                                data-score="2">Sell some investments</button>
+                            <button class="risk-answer bg-white border border-orange-200 px-3 py-2 rounded-lg text-sm"
+                                data-score="3">Hold and wait for recovery</button>
+                            <button class="risk-answer bg-white border border-orange-200 px-3 py-2 rounded-lg text-sm"
+                                data-score="4">Buy more investments</button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="font-medium mb-2">3. What is your main investment goal?</p>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="risk-answer bg-white border border-orange-200 px-3 py-2 rounded-lg text-sm"
+                                data-score="1">Preserve capital</button>
+                            <button class="risk-answer bg-white border border-orange-200 px-3 py-2 rounded-lg text-sm"
+                                data-score="2">Generate income</button>
+                            <button class="risk-answer bg-white border border-orange-200 px-3 py-2 rounded-lg text-sm"
+                                data-score="3">Balance growth and income</button>
+                            <button class="risk-answer bg-white border border-orange-200 px-3 py-2 rounded-lg text-sm"
+                                data-score="4">Maximize growth</button>
+                        </div>
+                    </div>
+
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="calculateRisk()">
+                        Calculate My Risk Profile
+                    </button>
+                </div>
+
+                <div class="expandable-content" id="risk-result">
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h4 class="font-bold text-green-700 mb-2">Your Risk Profile: <span
+                                id="risk-level">Moderate</span></h4>
+                        <p class="text-sm text-green-700 mb-3">Based on your answers, we recommend the following fund
+                            allocation:</p>
+
+                        <div class="mb-3">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Stock Funds:</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill bg-green-500" style="width: 60%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Bond Funds:</span>
+                                <span>30%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill bg-blue-500" style="width: 30%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Money Market Funds:</span>
+                                <span>10%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill bg-purple-500" style="width: 10%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fund Comparison Table -->
+            <div class="finance-card bg-white border border-orange-200 p-5 mb-6">
+                <h3 class="text-xl font-bold text-orange-600 mb-4">Popular Fund Comparison</h3>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-700">
+                        <thead class="text-xs text-gray-700 uppercase bg-orange-100">
+                            <tr>
+                                <th class="px-4 py-3">Fund Name</th>
+                                <th class="px-4 py-3">Type</th>
+                                <th class="px-4 py-3">Expense Ratio</th>
+                                <th class="px-4 py-3">5-Yr Return</th>
+                                <th class="px-4 py-3">Risk Level</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b hover:bg-orange-50">
+                                <td class="px-4 py-3 font-medium">Vanguard S&P 500 ETF</td>
+                                <td class="px-4 py-3">Index Fund/ETF</td>
+                                <td class="px-4 py-3">0.03%</td>
+                                <td class="px-4 py-3">14.2%</td>
+                                <td class="px-4 py-3">Medium</td>
+                            </tr>
+                            <tr class="bg-white border-b hover:bg-orange-50">
+                                <td class="px-4 py-3 font-medium">Fidelity Contrafund</td>
+                                <td class="px-4 py-3">Mutual Fund</td>
+                                <td class="px-4 py-3">0.86%</td>
+                                <td class="px-4 py-3">16.8%</td>
+                                <td class="px-4 py-3">Medium-High</td>
+                            </tr>
+                            <tr class="bg-white border-b hover:bg-orange-50">
+                                <td class="px-4 py-3 font-medium">iShares Core Bond ETF</td>
+                                <td class="px-4 py-3">Bond ETF</td>
+                                <td class="px-4 py-3">0.15%</td>
+                                <td class="px-4 py-3">4.3%</td>
+                                <td class="px-4 py-3">Low</td>
+                            </tr>
+                            <tr class="bg-white hover:bg-orange-50">
+                                <td class="px-4 py-3 font-medium">ARK Innovation ETF</td>
+                                <td class="px-4 py-3">Active ETF</td>
+                                <td class="px-4 py-3">0.75%</td>
+                                <td class="px-4 py-3">18.5%</td>
+                                <td class="px-4 py-3">High</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Additional Resources -->
+            <div class="finance-card bg-white border border-orange-200 p-5">
+                <h3 class="text-xl font-bold text-orange-600 mb-4">Additional Resources</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="#" class="flex items-center p-3 border border-orange-200 rounded-lg hover:bg-orange-50">
+                        <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-book text-orange-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Fund Investing Guide</h4>
+                            <p class="text-xs text-gray-600">Learn the basics of fund investing</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="flex items-center p-3 border border-orange-200 rounded-lg hover:bg-orange-50">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-calculator text-blue-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Fee Impact Calculator</h4>
+                            <p class="text-xs text-gray-600">See how fees affect your returns</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="flex items-center p-3 border border-orange-200 rounded-lg hover:bg-orange-50">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-chart-pie text-green-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Diversification Strategies</h4>
+                            <p class="text-xs text-gray-600">Build a balanced portfolio</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="flex items-center p-3 border border-orange-200 rounded-lg hover:bg-orange-50">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                            <i class="fas fa-file-invoice-dollar text-purple-500"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Tax Efficiency Guide</h4>
+                            <p class="text-xs text-gray-600">Minimize taxes on investments</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Initialize values
+        document.addEventListener('DOMContentLoaded', function () {
+            updateSliderValue('initialInvestment', 'initialInvestmentValue', '$');
+            updateSliderValue('monthlyContribution', 'monthlyContributionValue', '$');
+            updateSliderValue('returnRate', 'returnRateValue', '', '%');
+            updateSliderValue('investmentPeriod', 'investmentPeriodValue', '', ' years');
+
+            calculateInvestment();
+        });
+
+        // Update slider value displays
+        function updateSliderValue(sliderId, outputId, prefix = '', suffix = '') {
+            const slider = document.getElementById(sliderId);
+            const output = document.getElementById(outputId);
+
+            slider.addEventListener('input', function () {
+                output.textContent = prefix + parseInt(this.value).toLocaleString() + suffix;
+
+                if (sliderId === 'investmentPeriod') {
+                    document.getElementById('yearsResult').textContent = this.value;
+                }
+
+                calculateInvestment();
+            });
+        }
+
+        // Calculate investment growth
+        function calculateInvestment() {
+            const initial = parseFloat(document.getElementById('initialInvestment').value);
+            const monthly = parseFloat(document.getElementById('monthlyContribution').value);
+            const rate = parseFloat(document.getElementById('returnRate').value) / 100;
+            const years = parseFloat(document.getElementById('investmentPeriod').value);
+
+            // Calculate future value
+            const monthlyRate = rate / 12;
+            const months = years * 12;
+
+            // Future value of initial investment
+            const futureValueInitial = initial * Math.pow(1 + rate, years);
+
+            // Future value of monthly contributions
+            const futureValueContributions = monthly * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+
+            const totalValue = futureValueInitial + futureValueContributions;
+            const totalInvested = initial + (monthly * months);
+            const interestEarned = totalValue - totalInvested;
+
+            // Update UI
+            document.getElementById('finalValue').textContent = '$' + formatNumber(totalValue.toFixed(0));
+            document.getElementById('totalInvested').textContent = '$' + formatNumber(totalInvested.toFixed(0));
+            document.getElementById('interestEarned').textContent = '$' + formatNumber(interestEarned.toFixed(0));
+
+            // Update progress bars
+            document.querySelectorAll('.progress-fill')[0].style.width = Math.min(100, (totalInvested / totalValue * 100)) + '%';
+            document.querySelectorAll('.progress-fill')[1].style.width = Math.min(100, (interestEarned / totalValue * 100)) + '%';
+        }
+
+        // Format numbers with commas
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Risk assessment
+        let riskAnswers = [];
+
+        document.querySelectorAll('.risk-answer').forEach(button => {
+            button.addEventListener('click', function () {
+                // Remove active class from siblings
+                const siblings = this.parentElement.querySelectorAll('.risk-answer');
+                siblings.forEach(sib => sib.classList.remove('bg-orange-500', 'text-white'));
+
+                // Add active class to clicked button
+                this.classList.add('bg-orange-500', 'text-white');
+
+                // Store answer
+                const questionNum = parseInt(this.parentElement.parentElement.querySelector('p').textContent.split('.')[0]);
+                riskAnswers[questionNum - 1] = parseInt(this.dataset.score);
+            });
+        });
+
+        function calculateRisk() {
+            if (riskAnswers.length < 3) {
+                alert('Please answer all questions');
+                return;
+            }
+
+            const totalScore = riskAnswers.reduce((a, b) => a + b, 0);
+            let riskLevel = '';
+            let stockAllocation = 0;
+            let bondAllocation = 0;
+            let cashAllocation = 0;
+
+            if (totalScore <= 5) {
+                riskLevel = 'Conservative';
+                stockAllocation = 30;
+                bondAllocation = 50;
+                cashAllocation = 20;
+            } else if (totalScore <= 8) {
+                riskLevel = 'Moderate';
+                stockAllocation = 60;
+                bondAllocation = 30;
+                cashAllocation = 10;
+            } else {
+                riskLevel = 'Aggressive';
+                stockAllocation = 80;
+                bondAllocation = 15;
+                cashAllocation = 5;
+            }
+
+            // Update UI
+            document.getElementById('risk-level').textContent = riskLevel;
+            document.querySelectorAll('.progress-fill')[2].style.width = stockAllocation + '%';
+            document.querySelectorAll('.progress-fill')[3].style.width = bondAllocation + '%';
+            document.querySelectorAll('.progress-fill')[4].style.width = cashAllocation + '%';
+
+            document.querySelectorAll('.progress-fill')[2].parentElement.nextElementSibling.querySelector('span:last-child').textContent = stockAllocation + '%';
+            document.querySelectorAll('.progress-fill')[3].parentElement.nextElementSibling.querySelector('span:last-child').textContent = bondAllocation + '%';
+            document.querySelectorAll('.progress-fill')[4].parentElement.nextElementSibling.querySelector('span:last-child').textContent = cashAllocation + '%';
+
+            // Show result
+            document.getElementById('risk-result').classList.add('expanded');
+        }
+    </script>
+
+    <!-- ads  -->
+    <div id="ad-anchor-slot"></div>
+
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            alert('Right-click is disabled to protect our content.');
+        });
+
+        // Disable keyboard shortcuts
+        document.onkeydown = function (e) {
+            if (
+                (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c' || e.key === 'i' || e.key === 'j')) ||
+                e.key === 'F12' ||
+                (e.metaKey && e.altKey && e.key === 'i')
+            ) {
+                e.preventDefault();
+                alert('Access to developer tools and source code is disabled to protect our content.');
+                return false;
+            }
+            return true;
+        };
+
+        // Disable text selection
+        document.addEventListener('selectstart', function (e) {
+            e.preventDefault();
+        });
+
+        // Disable drag and drop
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+        });
+    </script>
+
+    <script>
+        window.googletag = window.googletag || { cmd: [] };
+        var anchorSlot;
+        googletag.cmd.push(function () {
+            anchorSlot = googletag.defineOutOfPageSlot('/23300646440/Anchortechgrowup', googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR);
+            if (anchorSlot) {
+                anchorSlot.addService(googletag.pubads());
+            }
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+
+    <script>
+        (function () {
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("DOM fully loaded.");
+
+                function showRewardedAd() {
+                    if (!window.googletag || !googletag.cmd) {
+                        console.error("Google Ad Manager is not properly initialized.");
+                        return;
+                    }
+                    // reward ads
+                    googletag.cmd.push(function () {
+                        try {
+                            const rewardedSlot = googletag
+                                .defineOutOfPageSlot('/23300646440/Native', googletag.enums.OutOfPageFormat.REWARDED)
+                                .addService(googletag.pubads());
+
+                            googletag.enableServices();
+                            googletag.display(rewardedSlot);
+                            console.log("Attempting to display rewarded ad...");
+
+                            googletag.pubads().addEventListener("rewardedSlotReady", function (evt) {
+                                console.log("Rewarded ad ready.");
+                                evt.makeRewardedVisible();
+                            });
+
+                            googletag.pubads().addEventListener("rewardedSlotClosed", function () {
+                                console.log("Ad closed.");
+                                googletag.destroySlots([rewardedSlot]);
+                            });
+                        } catch (error) {
+                            console.error("Error during ad setup:", error);
+                        }
+                    });
+                }
+
+                // Add 2-second delay before showing the rewarded ad
+                setTimeout(function () {
+                    console.log("2 seconds elapsed, showing rewarded ad...");
+                    showRewardedAd();
+                }, 2000); // 2000 milliseconds = 2 seconds
+            });
+        })();
+    </script>
+
+
+
+
+</body>
+
+</html>
