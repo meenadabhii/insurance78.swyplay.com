@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinSmart - Savings Guidance</title>
+    <title>FinSmart - Loan Guidance</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
@@ -49,7 +50,7 @@
 
                     // Define anchor ad with proper ID
                     anchorSlot = googletag.defineOutOfPageSlot(
-                        '/23293093930/anchor',
+                        'nchor',
                         googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR
                     );
 
@@ -197,7 +198,6 @@
 
 
 
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -207,12 +207,12 @@
         }
 
         .btn-primary {
-            box-shadow: 0 4px 6px rgba(255, 138, 0, 0.3);
+            box-shadow: 0 4px 6px rgba(236, 145, 42, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(255, 138, 0, 0.4);
+            box-shadow: 0 6px 12px rgba(218, 134, 39, 0.4);
         }
 
         .finance-card {
@@ -235,7 +235,15 @@
             max-height: 1000px;
         }
 
-        .savings-calculator {
+        .form-input {
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(231, 148, 53, 0.3);
+        }
+
+        .loan-calculator {
             background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
             border-radius: 16px;
         }
@@ -259,29 +267,18 @@
             cursor: pointer;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         }
-
-        .savings-icon {
-            background-color: #ffedd5;
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-        }
     </style>
 </head>
 
 <body class="bg-gradient-to-br from-orange-50 to-orange-100 min-h-screen flex items-center justify-center p-4">
     <div class="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
-        <!-- Savings Page -->
+        <!-- Loan Page -->
         <div>
             <header class="bg-orange-500 text-white p-5 flex items-center">
-                <a href="fin24.html" class="text-white mr-3">
+                <a href="finpro6.html" class="text-white mr-3">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                <h2 class="text-xl font-bold">Savings Strategies</h2>
+                <h2 class="text-xl font-bold">Loan Guidance & Services</h2>
             </header>
 
             <!-- ads -->
@@ -289,19 +286,18 @@
                 <div id="ad-slot-1" class="ad-container" style="display: block !important;"></div>
             </div>
 
-
             <!-- Header Section -->
             <div class="bg-gradient-to-r from-orange-400 to-orange-500 text-white p-5 text-center">
-                <h1 class="text-2xl font-bold mb-3">Build Your Financial Safety Net</h1>
-                <p class="text-orange-100 mb-4">Smart savings strategies to help you achieve your financial goals and
-                    prepare for the future.</p>
+                <h1 class="text-2xl font-bold mb-3">Find the Perfect Loan for Your Needs</h1>
+                <p class="text-orange-100 mb-4">Competitive rates, flexible terms, and a simple application process to
+                    help you achieve your financial goals.</p>
 
-                <!-- Navigation buttons -->
+                <!-- Orange-themed buttons -->
                 <div class="grid grid-cols-2 gap-3 mt-4">
-                    <a href="#savings-types" class="block">
+                    <a href="#loan-types" class="block">
                         <button
                             class="bg-white text-orange-600 hover:bg-orange-50 w-full py-3 rounded-lg font-bold shadow-md">
-                            <i class="fas fa-piggy-bank mr-2"></i> Savings Types
+                            <i class="fas fa-list-alt mr-2"></i> Loan Types
                         </button>
                     </a>
                     <a href="#calculator" class="block">
@@ -310,10 +306,10 @@
                             <i class="fas fa-calculator mr-2"></i> Calculator
                         </button>
                     </a>
-                    <a href="#strategies" class="block col-span-2">
+                    <a href="#application" class="block col-span-2">
                         <button
                             class="bg-orange-700 text-white hover:bg-orange-800 w-full py-3 rounded-lg font-bold shadow-md">
-                            <i class="fas fa-chart-line mr-2"></i> Strategies
+                            <i class="fas fa-edit mr-2"></i> Apply Now
                         </button>
                     </a>
                 </div>
@@ -321,219 +317,237 @@
 
 
             <main class="p-5">
-                <!-- Savings Options Card -->
-                <div id="savings-types" class="finance-card bg-white border border-orange-200 p-5 mb-5">
-                    <h3 class="text-xl font-bold text-orange-600 mb-3">Savings Options</h3>
-                    <p class="text-gray-700 mb-3">Explore various savings vehicles to find the right options for your
-                        financial goals.</p>
-                    <div class="expandable-content" id="savings-content">
+                <!-- Loan Options Card -->
+                <div id="loan-types" class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Loan Options</h3>
+                    <p class="text-gray-700 mb-3">Explore various loan options to find the one that best fits your
+                        financial needs and goals.</p>
+                    <div class="expandable-content" id="loan-content">
                         <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">Traditional Savings Accounts:</h4>
+                            <h4 class="font-bold mb-2">Personal Loans:</h4>
                             <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Basic savings accounts at banks and credit unions</li>
-                                <li class="mb-1">FDIC/NCUA insured up to $250,000</li>
-                                <li class="mb-1">Easy access to funds</li>
-                                <li>Typically lower interest rates</li>
+                                <li class="mb-1">Unsecured loans for various personal expenses</li>
+                                <li class="mb-1">Fixed interest rates and monthly payments</li>
+                                <li class="mb-1">Loan amounts from $1,000 to $50,000</li>
+                                <li class="mb-1">Repayment terms: 1-7 years</li>
+                                <li>Fast funding - often within 24-48 hours</li>
                             </ul>
                         </div>
                         <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">High-Yield Savings Accounts:</h4>
+                            <h4 class="font-bold mb-2">Mortgage Loans:</h4>
                             <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Higher interest rates than traditional savings</li>
-                                <li class="mb-1">Often offered by online banks</li>
-                                <li class="mb-1">FDIC insured</li>
-                                <li>May have higher minimum balance requirements</li>
+                                <li class="mb-1">Fixed-rate mortgages: stable payments</li>
+                                <li class="mb-1">Adjustable-rate mortgages: lower initial rates</li>
+                                <li class="mb-1">FHA loans: lower down payment options</li>
+                                <li class="mb-1">VA loans: for veterans and military members</li>
+                                <li>Jumbo loans: for higher-value properties</li>
                             </ul>
                         </div>
                         <div class="bg-orange-50 p-3 rounded-lg">
-                            <h4 class="font-bold mb-2">Certificates of Deposit (CDs):</h4>
+                            <h4 class="font-bold mb-2">Auto Loans:</h4>
                             <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Fixed interest rates for specific terms</li>
-                                <li class="mb-1">Higher rates for longer terms</li>
-                                <li class="mb-1">Early withdrawal penalties</li>
-                                <li>FDIC insured</li>
+                                <li class="mb-1">New car loans: lower rates for newer vehicles</li>
+                                <li class="mb-1">Used car loans: financing for pre-owned vehicles</li>
+                                <li class="mb-1">Refinancing: lower your current auto loan rate</li>
+                                <li>Lease buyouts: purchase your leased vehicle</li>
                             </ul>
                         </div>
                     </div>
                     <button
                         class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
-                        onclick="toggleExpand('savings-content')">
+                        onclick="toggleExpand('loan-content')">
                         Learn More
                     </button>
                 </div>
+                <!-- ads -->
+                <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                    <div id="ad-slot-2" class="ad-container" style="display: block !important;"></div>
+                </div>
 
-                <!-- Savings Calculator -->
-                <div id="calculator" class="finance-card savings-calculator bg-white border border-orange-200 p-5 mb-5">
-                    <h3 class="text-xl font-bold text-orange-600 mb-3">Savings Calculator</h3>
-                    <p class="text-gray-700 mb-3">See how your savings can grow over time with compound interest.</p>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-medium mb-2" for="initial-amount">Initial Amount:
-                            $<span id="initial-value">5,000</span></label>
-                        <input type="range" min="100" max="50000" value="5000" step="100" class="slider"
-                            id="initial-amount">
-                    </div>
+                <!-- Loan Calculator -->
+                <div id="calculator" class="finance-card loan-calculator bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Loan Calculator</h3>
+                    <p class="text-gray-700 mb-3">Estimate your monthly payments and find a loan that fits your budget.
+                    </p>
 
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-medium mb-2" for="monthly-contribution">Monthly
-                            Contribution: $<span id="monthly-value">200</span></label>
-                        <input type="range" min="0" max="2000" value="200" step="10" class="slider"
-                            id="monthly-contribution">
+                        <label class="block text-gray-700 text-sm font-medium mb-2" for="loan-amount">Loan Amount:
+                            $<span id="amount-value">15,000</span></label>
+                        <input type="range" min="1000" max="100000" value="15000" step="1000" class="slider"
+                            id="loan-amount">
                     </div>
 
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-medium mb-2" for="interest-rate">Interest Rate:
-                            <span id="rate-value">2.5</span>%</label>
-                        <input type="range" min="0.1" max="10" value="2.5" step="0.1" class="slider" id="interest-rate">
+                            <span id="rate-value">7.5</span>%</label>
+                        <input type="range" min="1" max="20" value="7.5" step="0.1" class="slider" id="interest-rate">
                     </div>
 
                     <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-medium mb-2" for="time-period">Time Period: <span
-                                id="time-value">10</span> years</label>
-                        <input type="range" min="1" max="30" value="10" step="1" class="slider" id="time-period">
+                        <label class="block text-gray-700 text-sm font-medium mb-2" for="loan-term">Loan Term: <span
+                                id="term-value">5</span> years</label>
+                        <input type="range" min="1" max="10" value="5" step="1" class="slider" id="loan-term">
                     </div>
 
                     <div class="bg-orange-500 text-white p-4 rounded-lg text-center">
-                        <p class="text-sm">Future Savings Value</p>
-                        <p class="text-2xl font-bold" id="future-value">$33,456.80</p>
-                        <p class="text-xs mt-1">Total Contributions: <span id="total-contributions">$29,000</span></p>
-                        <p class="text-xs">Interest Earned: <span id="interest-earned">$4,456.80</span></p>
+                        <p class="text-sm">Estimated Monthly Payment</p>
+                        <p class="text-2xl font-bold" id="monthly-payment">$301.00</p>
+                        <p class="text-xs mt-1">Total Payment: <span id="total-payment">$18,060.00</span></p>
+                        <p class="text-xs">Total Interest: <span id="total-interest">$3,060.00</span></p>
                     </div>
                 </div>
+
+                <!-- Loan Application Form -->
+                <div id="application" class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Loan Application</h3>
+                    <p class="text-gray-700 mb-3">Fill out this quick form to get pre-qualified for a loan without
+                        impacting your credit score.</p>
+
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2" for="full-name">Full
+                                Name</label>
+                            <input type="text" id="full-name"
+                                class="form-input w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:border-orange-500"
+                                placeholder="John Doe">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2" for="email">Email
+                                Address</label>
+                            <input type="email" id="email"
+                                class="form-input w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:border-orange-500"
+                                placeholder="john@example.com">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2" for="phone">Phone Number</label>
+                            <input type="tel" id="phone"
+                                class="form-input w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:border-orange-500"
+                                placeholder="(123) 456-7890">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2" for="loan-type">Loan
+                                Type</label>
+                            <select id="loan-type"
+                                class="form-input w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:border-orange-500">
+                                <option value="">Select Loan Type</option>
+                                <option value="personal">Personal Loan</option>
+                                <option value="mortgage">Mortgage Loan</option>
+                                <option value="auto">Auto Loan</option>
+                                <option value="student">Student Loan</option>
+                                <option value="business">Business Loan</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2" for="employment">Employment
+                                Status</label>
+                            <select id="employment"
+                                class="form-input w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:border-orange-500">
+                                <option value="">Select Employment Status</option>
+                                <option value="employed">Employed</option>
+                                <option value="self-employed">Self-Employed</option>
+                                <option value="retired">Retired</option>
+                                <option value="student">Student</option>
+                                <option value="unemployed">Unemployed</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center">
+                            <input type="checkbox" id="agree-terms"
+                                class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded">
+                            <label for="agree-terms" class="ml-2 block text-sm text-gray-700">
+                                I agree to the <a href="#" class="text-orange-600 hover:text-orange-500">terms and
+                                    conditions</a>
+                            </label>
+                        </div>
+
+                        <button type="submit"
+                            class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-3 rounded-lg font-bold">
+                            Submit Application
+                        </button>
+                    </form>
+                </div>
+
+
+                <!-- Loan Requirements Card -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Loan Requirements</h3>
+                    <p class="text-gray-700 mb-3">What you need to qualify for a loan and improve your chances of
+                        approval.</p>
+                    <div class="expandable-content" id="requirements-content">
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Basic Requirements:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Good credit score (typically 670+)</li>
+                                <li class="mb-1">Stable income and employment history</li>
+                                <li class="mb-1">Low debt-to-income ratio (below 36%)</li>
+                                <li class="mb-1">Proof of identity and citizenship status</li>
+                                <li>Collateral for secured loans</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Documents Needed:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Government-issued ID (driver's license, passport)</li>
+                                <li class="mb-1">Social Security number</li>
+                                <li class="mb-1">Proof of income (pay stubs, tax returns)</li>
+                                <li class="mb-1">Proof of address (utility bills, lease agreement)</li>
+                                <li>Bank statements and asset information</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg">
+                            <h4 class="font-bold mb-2">Tips to Improve Approval Chances:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">Check your credit report for errors</li>
+                                <li class="mb-1">Pay down existing debt before applying</li>
+                                <li class="mb-1">Avoid applying for multiple loans at once</li>
+                                <li>Consider adding a co-signer if you have weak credit</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button
+                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
+                        onclick="toggleExpand('requirements-content')">
+                        Learn More
+                    </button>
+                </div>
+
 
                 <!-- ads -->
                 <div id="banner-ad" class="ads-box" style="min-height: 250px;">
                     <div id="ad-slot-2" class="ad-container" style="display: block !important;"></div>
                 </div>
 
-                <!-- Savings Strategies Card -->
-                <div id="strategies" class="finance-card bg-white border border-orange-200 p-5 mb-5">
-                    <h3 class="text-xl font-bold text-orange-600 mb-3">Savings Strategies</h3>
-                    <p class="text-gray-700 mb-3">Effective approaches to build your savings consistently.</p>
-
-                    <div class="grid grid-cols-2 gap-3 mb-4">
-                        <a href="emergency-fund.html" class="block">
-                            <div class="bg-orange-100 p-4 rounded-lg text-center hover:bg-orange-200">
-                                <i class="fas fa-first-aid text-orange-600 text-2xl mb-2"></i>
-                                <p class="text-sm font-medium">Emergency Fund</p>
-                            </div>
-                        </a>
-                        <a href="automatic-savings.html" class="block">
-                            <div class="bg-orange-100 p-4 rounded-lg text-center hover:bg-orange-200">
-                                <i class="fas fa-robot text-orange-600 text-2xl mb-2"></i>
-                                <p class="text-sm font-medium">Auto Savings</p>
-                            </div>
-                        </a>
-                        <a href="goal-setting.html" class="block">
-                            <div class="bg-orange-100 p-4 rounded-lg text-center hover:bg-orange-200">
-                                <i class="fas fa-bullseye text-orange-600 text-2xl mb-2"></i>
-                                <p class="text-sm font-medium">Goal Setting</p>
-                            </div>
-                        </a>
-                        <a href="savings-challenges.html" class="block">
-                            <div class="bg-orange-100 p-4 rounded-lg text-center hover:bg-orange-200">
-                                <i class="fas fa-trophy text-orange-600 text-2xl mb-2"></i>
-                                <p class="text-sm font-medium">Challenges</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="expandable-content" id="strategies-content">
-                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">The 50/30/20 Rule:</h4>
-                            <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">50% of income for needs (housing, food, utilities)</li>
-                                <li class="mb-1">30% for wants (entertainment, dining out)</li>
-                                <li class="mb-1">20% for savings and debt repayment</li>
-                                <li>Adjust percentages based on your financial goals</li>
-                            </ul>
-                        </div>
-                        <div class="bg-orange-50 p-3 rounded-lg">
-                            <h4 class="font-bold mb-2">Pay Yourself First:</h4>
-                            <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Automate transfers to savings on payday</li>
-                                <li class="mb-1">Treat savings like a non-negotiable expense</li>
-                                <li class="mb-1">Start with a manageable percentage (5-10%)</li>
-                                <li>Increase savings rate with each raise or bonus</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button
-                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
-                        onclick="toggleExpand('strategies-content')">
-                        Learn More
-                    </button>
-                </div>
-
-
-                <!-- Savings Goals Card -->
-                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
-                    <h3 class="text-xl font-bold text-orange-600 mb-3">Savings Goals</h3>
-                    <p class="text-gray-700 mb-3">Common savings targets and how to achieve them.</p>
-                    <div class="expandable-content" id="goals-content">
-                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">Emergency Fund:</h4>
-                            <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Aim for 3-6 months of living expenses</li>
-                                <li class="mb-1">Keep in easily accessible account</li>
-                                <li class="mb-1">Start with $1,000 mini emergency fund</li>
-                                <li>Only use for true emergencies</li>
-                            </ul>
-                        </div>
-                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">Down Payment for Home:</h4>
-                            <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Target 20% of home price to avoid PMI</li>
-                                <li class="mb-1">Consider first-time homebuyer programs</li>
-                                <li class="mb-1">Use separate savings account for clarity</li>
-                                <li>Adjust timeline based on housing market</li>
-                            </ul>
-                        </div>
-                        <div class="bg-orange-50 p-3 rounded-lg">
-                            <h4 class="font-bold mb-2">Retirement Savings:</h4>
-                            <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Aim to save 15% of income for retirement</li>
-                                <li class="mb-1">Take advantage of employer matching</li>
-                                <li class="mb-1">Consider IRAs in addition to workplace plans</li>
-                                <li>Increase contributions with salary increases</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button
-                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
-                        onclick="toggleExpand('goals-content')">
-                        Learn More
-                    </button>
-                </div>
 
                 <!-- FAQ Section -->
                 <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
-                    <h3 class="text-xl font-bold text-orange-600 mb-3">Savings FAQs</h3>
-                    <p class="text-gray-700 mb-3">Common questions about saving money effectively.</p>
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Frequently Asked Questions</h3>
+                    <p class="text-gray-700 mb-3">Get answers to common questions about loans and the application
+                        process.</p>
                     <div class="expandable-content" id="faq-content">
                         <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">Q: How much should I have in my emergency fund?</h4>
-                            <p class="text-sm">A: Most financial experts recommend 3-6 months of essential living
-                                expenses. If you have variable income or work in an unstable industry, aim for 6-12
-                                months of expenses.</p>
+                            <h4 class="font-bold mb-2">Q: How long does the loan approval process take?</h4>
+                            <p class="text-sm">A: Personal loans can be approved within 1-2 business days, while
+                                mortgage loans typically take 30-45 days from application to closing.</p>
                         </div>
                         <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">Q: Should I pay off debt or save first?</h4>
-                            <p class="text-sm">A: It's generally recommended to build a small emergency fund
-                                ($1,000-2,000) first, then focus on high-interest debt, then build a full emergency
-                                fund, and finally save for other goals while paying down lower-interest debt.</p>
+                            <h4 class="font-bold mb-2">Q: Will applying for a loan affect my credit score?</h4>
+                            <p class="text-sm">A: Initially, there may be a small dip due to the hard inquiry, but
+                                making timely payments on your loan will ultimately help build your credit history.</p>
                         </div>
                         <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">Q: Where should I keep my emergency fund?</h4>
-                            <p class="text-sm">A: Keep emergency savings in a separate, easily accessible account like a
-                                high-yield savings account. The goal is preservation and access, not growth, so avoid
-                                investing emergency funds in the stock market.</p>
+                            <h4 class="font-bold mb-2">Q: What's the difference between fixed and variable rates?</h4>
+                            <p class="text-sm">A: Fixed rates stay the same throughout the loan term, while variable
+                                rates can change based on market conditions. Fixed rates provide predictability, while
+                                variable rates may start lower but carry future uncertainty.</p>
                         </div>
                         <div class="bg-orange-50 p-3 rounded-lg">
-                            <h4 class="font-bold mb-2">Q: How can I make saving money easier?</h4>
-                            <p class="text-sm">A: Automate your savings by setting up direct transfers from checking to
-                                savings on payday. Also, consider apps that round up purchases and save the difference,
-                                and always "pay yourself first" before spending on discretionary items.</p>
+                            <h4 class="font-bold mb-2">Q: Can I pay off my loan early?</h4>
+                            <p class="text-sm">A: Most lenders allow early repayment, but some may charge a prepayment
+                                penalty. Be sure to check the terms before signing the agreement.</p>
                         </div>
                     </div>
                     <button
@@ -543,10 +557,49 @@
                     </button>
                 </div>
 
+                <!-- Contact Information -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Need Help? Contact Us</h3>
+                    <p class="text-gray-700 mb-3">Our loan specialists are ready to assist you with any questions.</p>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <div class="bg-orange-100 p-3 rounded-full mr-3">
+                                <i class="fas fa-phone text-orange-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Call Us</p>
+                                <p class="text-orange-600">1-800-FIN-LOAN</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="bg-orange-100 p-3 rounded-full mr-3">
+                                <i class="fas fa-envelope text-orange-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Email Us</p>
+                                <p class="text-orange-600">loans@finsmart.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="bg-orange-100 p-3 rounded-full mr-3">
+                                <i class="fas fa-clock text-orange-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Hours</p>
+                                <p>Mon-Fri: 8am-8pm EST</p>
+                                <p>Sat: 9am-5pm EST</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Motivational closing line -->
                 <div class="text-center py-6">
-                    <p class="text-orange-600 font-semibold italic">Small consistent savings grow into significant
-                        wealth - start today and watch your financial security multiply!</p>
+                    <p class="text-orange-600 font-semibold italic">Take the first step toward your goals today - the
+                        right loan can make all the difference!</p>
                 </div>
             </main>
         </div>
@@ -577,64 +630,56 @@
             }
         }
 
-        // Savings Calculator Functionality
-        function calculateSavings() {
-            const initialAmount = parseFloat(document.getElementById('initial-amount').value);
-            const monthlyContribution = parseFloat(document.getElementById('monthly-contribution').value);
+        // Loan Calculator Functionality
+        function calculateLoan() {
+            const loanAmount = parseFloat(document.getElementById('loan-amount').value);
             const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 / 12; // Monthly interest rate
-            const timePeriod = parseFloat(document.getElementById('time-period').value) * 12; // Months
+            const loanTerm = parseFloat(document.getElementById('loan-term').value) * 12; // Months
 
-            // Calculate future value
-            let futureValue = initialAmount;
-            for (let i = 0; i < timePeriod; i++) {
-                futureValue = futureValue * (1 + interestRate) + monthlyContribution;
-            }
-
-            // Calculate totals
-            const totalContributions = initialAmount + (monthlyContribution * timePeriod);
-            const interestEarned = futureValue - totalContributions;
+            // Calculate monthly payment
+            const x = Math.pow(1 + interestRate, loanTerm);
+            const monthlyPayment = (loanAmount * x * interestRate) / (x - 1);
 
             // Update display
-            document.getElementById('future-value').textContent = '$' + futureValue.toFixed(2);
-            document.getElementById('total-contributions').textContent = '$' + totalContributions.toFixed(2);
-            document.getElementById('interest-earned').textContent = '$' + interestEarned.toFixed(2);
+            document.getElementById('monthly-payment').textContent = '$' + monthlyPayment.toFixed(2);
+            document.getElementById('total-payment').textContent = '$' + (monthlyPayment * loanTerm).toFixed(2);
+            document.getElementById('total-interest').textContent = '$' + ((monthlyPayment * loanTerm) - loanAmount).toFixed(2);
         }
 
         // Initialize calculator and event listeners
         document.addEventListener('DOMContentLoaded', function () {
             // Format initial values
-            document.getElementById('initial-value').textContent = Number(5000).toLocaleString();
-            document.getElementById('monthly-value').textContent = Number(200).toLocaleString();
-            document.getElementById('rate-value').textContent = '2.5';
-            document.getElementById('time-value').textContent = '10';
+            document.getElementById('amount-value').textContent = Number(15000).toLocaleString();
+            document.getElementById('rate-value').textContent = '7.5';
+            document.getElementById('term-value').textContent = '5';
 
             // Calculate initial values
-            calculateSavings();
+            calculateLoan();
 
             // Add event listeners to sliders
-            document.getElementById('initial-amount').addEventListener('input', function () {
-                document.getElementById('initial-value').textContent = Number(this.value).toLocaleString();
-                calculateSavings();
-            });
-
-            document.getElementById('monthly-contribution').addEventListener('input', function () {
-                document.getElementById('monthly-value').textContent = Number(this.value).toLocaleString();
-                calculateSavings();
+            document.getElementById('loan-amount').addEventListener('input', function () {
+                document.getElementById('amount-value').textContent = Number(this.value).toLocaleString();
+                calculateLoan();
             });
 
             document.getElementById('interest-rate').addEventListener('input', function () {
                 document.getElementById('rate-value').textContent = this.value;
-                calculateSavings();
+                calculateLoan();
             });
 
-            document.getElementById('time-period').addEventListener('input', function () {
-                document.getElementById('time-value').textContent = this.value;
-                calculateSavings();
+            document.getElementById('loan-term').addEventListener('input', function () {
+                document.getElementById('term-value').textContent = this.value;
+                calculateLoan();
+            });
+
+            // Form submission
+            document.querySelector('form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                alert('Thank you for your application! A loan specialist will contact you shortly.');
+                this.reset();
             });
         });
     </script>
-
-
 
 
     <!-- ads  -->
@@ -729,6 +774,7 @@
             });
         })();
     </script>
+
 
 
 </body>

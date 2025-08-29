@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinSmart - Savings Guidance</title>
+    <title>FinSmart - Insurance Guidance</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
@@ -197,7 +198,6 @@
 
 
 
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -235,7 +235,15 @@
             max-height: 1000px;
         }
 
-        .savings-calculator {
+        .form-input {
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(255, 138, 0, 0.3);
+        }
+
+        .insurance-calculator {
             background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
             border-radius: 16px;
         }
@@ -260,7 +268,7 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
         }
 
-        .savings-icon {
+        .insurance-icon {
             background-color: #ffedd5;
             width: 50px;
             height: 50px;
@@ -275,33 +283,31 @@
 
 <body class="bg-gradient-to-br from-orange-50 to-orange-100 min-h-screen flex items-center justify-center p-4">
     <div class="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
-        <!-- Savings Page -->
+        <!-- Insurance Page -->
         <div>
             <header class="bg-orange-500 text-white p-5 flex items-center">
                 <a href="fin24.html" class="text-white mr-3">
                     <i class="fas fa-arrow-left"></i>
                 </a>
-                <h2 class="text-xl font-bold">Savings Strategies</h2>
+                <h2 class="text-xl font-bold">Insurance Guidance & Protection</h2>
             </header>
-
             <!-- ads -->
             <div id="banner-ad" class="ads-box" style="min-height: 250px;">
                 <div id="ad-slot-1" class="ad-container" style="display: block !important;"></div>
             </div>
 
-
             <!-- Header Section -->
             <div class="bg-gradient-to-r from-orange-400 to-orange-500 text-white p-5 text-center">
-                <h1 class="text-2xl font-bold mb-3">Build Your Financial Safety Net</h1>
-                <p class="text-orange-100 mb-4">Smart savings strategies to help you achieve your financial goals and
-                    prepare for the future.</p>
+                <h1 class="text-2xl font-bold mb-3">Protect What Matters Most</h1>
+                <p class="text-orange-100 mb-4">Find the right coverage for your life, health, property, and future with
+                    our comprehensive insurance guidance.</p>
 
-                <!-- Navigation buttons -->
+                <!-- Orange-themed buttons -->
                 <div class="grid grid-cols-2 gap-3 mt-4">
-                    <a href="#savings-types" class="block">
+                    <a href="#insurance-types" class="block">
                         <button
                             class="bg-white text-orange-600 hover:bg-orange-50 w-full py-3 rounded-lg font-bold shadow-md">
-                            <i class="fas fa-piggy-bank mr-2"></i> Savings Types
+                            <i class="fas fa-shield-alt mr-2"></i> Coverage
                         </button>
                     </a>
                     <a href="#calculator" class="block">
@@ -310,230 +316,277 @@
                             <i class="fas fa-calculator mr-2"></i> Calculator
                         </button>
                     </a>
-                    <a href="#strategies" class="block col-span-2">
+                    <a href="#quotes" class="block col-span-2">
                         <button
                             class="bg-orange-700 text-white hover:bg-orange-800 w-full py-3 rounded-lg font-bold shadow-md">
-                            <i class="fas fa-chart-line mr-2"></i> Strategies
+                            <i class="fas fa-file-invoice-dollar mr-2"></i> Get Quotes
                         </button>
                     </a>
                 </div>
             </div>
 
-
-            <main class="p-5">
-                <!-- Savings Options Card -->
-                <div id="savings-types" class="finance-card bg-white border border-orange-200 p-5 mb-5">
-                    <h3 class="text-xl font-bold text-orange-600 mb-3">Savings Options</h3>
-                    <p class="text-gray-700 mb-3">Explore various savings vehicles to find the right options for your
-                        financial goals.</p>
-                    <div class="expandable-content" id="savings-content">
-                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">Traditional Savings Accounts:</h4>
-                            <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Basic savings accounts at banks and credit unions</li>
-                                <li class="mb-1">FDIC/NCUA insured up to $250,000</li>
-                                <li class="mb-1">Easy access to funds</li>
-                                <li>Typically lower interest rates</li>
-                            </ul>
-                        </div>
-                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">High-Yield Savings Accounts:</h4>
-                            <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Higher interest rates than traditional savings</li>
-                                <li class="mb-1">Often offered by online banks</li>
-                                <li class="mb-1">FDIC insured</li>
-                                <li>May have higher minimum balance requirements</li>
-                            </ul>
-                        </div>
-                        <div class="bg-orange-50 p-3 rounded-lg">
-                            <h4 class="font-bold mb-2">Certificates of Deposit (CDs):</h4>
-                            <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Fixed interest rates for specific terms</li>
-                                <li class="mb-1">Higher rates for longer terms</li>
-                                <li class="mb-1">Early withdrawal penalties</li>
-                                <li>FDIC insured</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button
-                        class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
-                        onclick="toggleExpand('savings-content')">
-                        Learn More
-                    </button>
-                </div>
-
-                <!-- Savings Calculator -->
-                <div id="calculator" class="finance-card savings-calculator bg-white border border-orange-200 p-5 mb-5">
-                    <h3 class="text-xl font-bold text-orange-600 mb-3">Savings Calculator</h3>
-                    <p class="text-gray-700 mb-3">See how your savings can grow over time with compound interest.</p>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-medium mb-2" for="initial-amount">Initial Amount:
-                            $<span id="initial-value">5,000</span></label>
-                        <input type="range" min="100" max="50000" value="5000" step="100" class="slider"
-                            id="initial-amount">
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-medium mb-2" for="monthly-contribution">Monthly
-                            Contribution: $<span id="monthly-value">200</span></label>
-                        <input type="range" min="0" max="2000" value="200" step="10" class="slider"
-                            id="monthly-contribution">
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-medium mb-2" for="interest-rate">Interest Rate:
-                            <span id="rate-value">2.5</span>%</label>
-                        <input type="range" min="0.1" max="10" value="2.5" step="0.1" class="slider" id="interest-rate">
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-medium mb-2" for="time-period">Time Period: <span
-                                id="time-value">10</span> years</label>
-                        <input type="range" min="1" max="30" value="10" step="1" class="slider" id="time-period">
-                    </div>
-
-                    <div class="bg-orange-500 text-white p-4 rounded-lg text-center">
-                        <p class="text-sm">Future Savings Value</p>
-                        <p class="text-2xl font-bold" id="future-value">$33,456.80</p>
-                        <p class="text-xs mt-1">Total Contributions: <span id="total-contributions">$29,000</span></p>
-                        <p class="text-xs">Interest Earned: <span id="interest-earned">$4,456.80</span></p>
-                    </div>
-                </div>
-
                 <!-- ads -->
                 <div id="banner-ad" class="ads-box" style="min-height: 250px;">
                     <div id="ad-slot-2" class="ad-container" style="display: block !important;"></div>
                 </div>
-
-                <!-- Savings Strategies Card -->
-                <div id="strategies" class="finance-card bg-white border border-orange-200 p-5 mb-5">
-                    <h3 class="text-xl font-bold text-orange-600 mb-3">Savings Strategies</h3>
-                    <p class="text-gray-700 mb-3">Effective approaches to build your savings consistently.</p>
-
-                    <div class="grid grid-cols-2 gap-3 mb-4">
-                        <a href="emergency-fund.html" class="block">
-                            <div class="bg-orange-100 p-4 rounded-lg text-center hover:bg-orange-200">
-                                <i class="fas fa-first-aid text-orange-600 text-2xl mb-2"></i>
-                                <p class="text-sm font-medium">Emergency Fund</p>
-                            </div>
-                        </a>
-                        <a href="automatic-savings.html" class="block">
-                            <div class="bg-orange-100 p-4 rounded-lg text-center hover:bg-orange-200">
-                                <i class="fas fa-robot text-orange-600 text-2xl mb-2"></i>
-                                <p class="text-sm font-medium">Auto Savings</p>
-                            </div>
-                        </a>
-                        <a href="goal-setting.html" class="block">
-                            <div class="bg-orange-100 p-4 rounded-lg text-center hover:bg-orange-200">
-                                <i class="fas fa-bullseye text-orange-600 text-2xl mb-2"></i>
-                                <p class="text-sm font-medium">Goal Setting</p>
-                            </div>
-                        </a>
-                        <a href="savings-challenges.html" class="block">
-                            <div class="bg-orange-100 p-4 rounded-lg text-center hover:bg-orange-200">
-                                <i class="fas fa-trophy text-orange-600 text-2xl mb-2"></i>
-                                <p class="text-sm font-medium">Challenges</p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="expandable-content" id="strategies-content">
+            <main class="p-5">
+                <!-- Insurance Types Card -->
+                <div id="insurance-types" class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Insurance Coverage Options</h3>
+                    <p class="text-gray-700 mb-3">Explore various insurance options to protect yourself, your family,
+                        and your assets.</p>
+                    <div class="expandable-content" id="coverage-content">
                         <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">The 50/30/20 Rule:</h4>
+                            <h4 class="font-bold mb-2">Life Insurance:</h4>
                             <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">50% of income for needs (housing, food, utilities)</li>
-                                <li class="mb-1">30% for wants (entertainment, dining out)</li>
-                                <li class="mb-1">20% for savings and debt repayment</li>
-                                <li>Adjust percentages based on your financial goals</li>
+                                <li class="mb-1">Term Life: Coverage for a specific period</li>
+                                <li class="mb-1">Whole Life: Permanent coverage with cash value</li>
+                                <li class="mb-1">Universal Life: Flexible premium permanent coverage</li>
+                                <li>Final Expense: Smaller policies for end-of-life costs</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 p-3 rounded-lg mb-3">
+                            <h4 class="font-bold mb-2">Health Insurance:</h4>
+                            <ul class="text-sm list-disc pl-5">
+                                <li class="mb-1">HMO: Health Maintenance Organization</li>
+                                <li class="mb-1">PPO: Preferred Provider Organization</li>
+                                <li class="mb-1">EPO: Exclusive Provider Organization</li>
+                                <li>HDHP: High-Deductible Health Plans with HSAs</li>
                             </ul>
                         </div>
                         <div class="bg-orange-50 p-3 rounded-lg">
-                            <h4 class="font-bold mb-2">Pay Yourself First:</h4>
+                            <h4 class="font-bold mb-2">Property Insurance:</h4>
                             <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Automate transfers to savings on payday</li>
-                                <li class="mb-1">Treat savings like a non-negotiable expense</li>
-                                <li class="mb-1">Start with a manageable percentage (5-10%)</li>
-                                <li>Increase savings rate with each raise or bonus</li>
+                                <li class="mb-1">Homeowners: Protection for your home and belongings</li>
+                                <li class="mb-1">Renters: Coverage for personal property in rentals</li>
+                                <li class="mb-1">Auto: Liability, collision, and comprehensive coverage</li>
+                                <li>Umbrella: Extra liability protection beyond standard policies</li>
                             </ul>
                         </div>
                     </div>
                     <button
                         class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
-                        onclick="toggleExpand('strategies-content')">
+                        onclick="toggleExpand('coverage-content')">
                         Learn More
                     </button>
                 </div>
 
+                <!-- Insurance Needs Calculator -->
+                <div id="calculator"
+                    class="finance-card insurance-calculator bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Insurance Needs Calculator</h3>
+                    <p class="text-gray-700 mb-3">Determine how much coverage you need to protect your family's
+                        financial future.</p>
 
-                <!-- Savings Goals Card -->
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-medium mb-2" for="annual-income">Annual Income:
+                            $<span id="income-value">75,000</span></label>
+                        <input type="range" min="30000" max="500000" value="75000" step="5000" class="slider"
+                            id="annual-income">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-medium mb-2" for="dependents">Number of
+                            Dependents: <span id="dependents-value">2</span></label>
+                        <input type="range" min="0" max="10" value="2" step="1" class="slider" id="dependents">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-medium mb-2" for="debts">Outstanding Debts:
+                            $<span id="debts-value">50,000</span></label>
+                        <input type="range" min="0" max="500000" value="50000" step="5000" class="slider" id="debts">
+                    </div>
+
+                    <div class="bg-orange-500 text-white p-4 rounded-lg text-center">
+                        <p class="text-sm">Recommended Life Insurance Coverage</p>
+                        <p class="text-2xl font-bold" id="coverage-amount">$500,000</p>
+                        <p class="text-xs mt-1">Based on 10x income rule + debts</p>
+                    </div>
+                </div>
+
+
+
+                <!-- Insurance Quote Form -->
+                <div id="quotes" class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Get Insurance Quotes</h3>
+                    <p class="text-gray-700 mb-3">Compare rates from top providers in minutes. No obligation, no spam.
+                    </p>
+
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2" for="full-name">Full
+                                Name</label>
+                            <input type="text" id="full-name"
+                                class="form-input w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:border-orange-500"
+                                placeholder="John Doe">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2" for="email">Email
+                                Address</label>
+                            <input type="email" id="email"
+                                class="form-input w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:border-orange-500"
+                                placeholder="john@example.com">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2" for="phone">Phone Number</label>
+                            <input type="tel" id="phone"
+                                class="form-input w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:border-orange-500"
+                                placeholder="(123) 456-7890">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-2" for="insurance-type">Insurance
+                                Type</label>
+                            <select id="insurance-type"
+                                class="form-input w-full px-4 py-2 border border-orange-200 rounded-lg focus:outline-none focus:border-orange-500">
+                                <option value="">Select Insurance Type</option>
+                                <option value="life">Life Insurance</option>
+                                <option value="health">Health Insurance</option>
+                                <option value="auto">Auto Insurance</option>
+                                <option value="home">Home Insurance</option>
+                                <option value="renters">Renters Insurance</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center">
+                            <input type="checkbox" id="agree-terms"
+                                class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded">
+                            <label for="agree-terms" class="ml-2 block text-sm text-gray-700">
+                                I agree to the <a href="#" class="text-orange-600 hover:text-orange-500">terms and
+                                    conditions</a>
+                            </label>
+                        </div>
+
+                        <button type="submit"
+                            class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-3 rounded-lg font-bold">
+                            Get Quotes Now
+                        </button>
+                    </form>
+                </div>
+
+
+
+                <!-- Insurance Tips Card -->
                 <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
-                    <h3 class="text-xl font-bold text-orange-600 mb-3">Savings Goals</h3>
-                    <p class="text-gray-700 mb-3">Common savings targets and how to achieve them.</p>
-                    <div class="expandable-content" id="goals-content">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Insurance Buying Guide</h3>
+                    <p class="text-gray-700 mb-3">Smart tips for choosing the right coverage at the best price.</p>
+                    <div class="expandable-content" id="tips-content">
                         <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">Emergency Fund:</h4>
+                            <h4 class="font-bold mb-2">How to Choose the Right Policy:</h4>
                             <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Aim for 3-6 months of living expenses</li>
-                                <li class="mb-1">Keep in easily accessible account</li>
-                                <li class="mb-1">Start with $1,000 mini emergency fund</li>
-                                <li>Only use for true emergencies</li>
+                                <li class="mb-1">Assess your specific needs and risks</li>
+                                <li class="mb-1">Compare multiple quotes from different providers</li>
+                                <li class="mb-1">Check the financial strength rating of insurers</li>
+                                <li class="mb-1">Understand policy exclusions and limitations</li>
+                                <li>Review customer satisfaction and claims handling records</li>
                             </ul>
                         </div>
                         <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">Down Payment for Home:</h4>
+                            <h4 class="font-bold mb-2">Ways to Save on Insurance:</h4>
                             <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Target 20% of home price to avoid PMI</li>
-                                <li class="mb-1">Consider first-time homebuyer programs</li>
-                                <li class="mb-1">Use separate savings account for clarity</li>
-                                <li>Adjust timeline based on housing market</li>
+                                <li class="mb-1">Bundle multiple policies with the same provider</li>
+                                <li class="mb-1">Choose higher deductibles to lower premiums</li>
+                                <li class="mb-1">Maintain good credit (where permitted by law)</li>
+                                <li class="mb-1">Ask about discounts (safe driver, security systems, etc.)</li>
+                                <li>Review and adjust coverage annually</li>
                             </ul>
                         </div>
                         <div class="bg-orange-50 p-3 rounded-lg">
-                            <h4 class="font-bold mb-2">Retirement Savings:</h4>
+                            <h4 class="font-bold mb-2">When to Review Your Coverage:</h4>
                             <ul class="text-sm list-disc pl-5">
-                                <li class="mb-1">Aim to save 15% of income for retirement</li>
-                                <li class="mb-1">Take advantage of employer matching</li>
-                                <li class="mb-1">Consider IRAs in addition to workplace plans</li>
-                                <li>Increase contributions with salary increases</li>
+                                <li class="mb-1">After major life events (marriage, birth, divorce)</li>
+                                <li class="mb-1">When buying a home or vehicle</li>
+                                <li class="mb-1">After significant changes in income</li>
+                                <li>At least once a year during policy renewal</li>
                             </ul>
                         </div>
                     </div>
                     <button
                         class="btn-primary bg-orange-500 hover:bg-orange-600 text-white w-full py-2 rounded-lg font-bold"
-                        onclick="toggleExpand('goals-content')">
+                        onclick="toggleExpand('tips-content')">
                         Learn More
                     </button>
+                </div>
+
+                <!-- Insurance Providers -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Top Insurance Providers</h3>
+                    <p class="text-gray-700 mb-3">We partner with leading insurance companies to bring you the best
+                        options.</p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center p-3 bg-orange-50 rounded-lg">
+                            <div class="insurance-icon">
+                                <i class="fas fa-shield-alt text-orange-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">State Farm</h4>
+                                <p class="text-sm text-gray-600">Auto, home, life, health</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center p-3 bg-orange-50 rounded-lg">
+                            <div class="insurance-icon">
+                                <i class="fas fa-umbrella text-orange-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Allstate</h4>
+                                <p class="text-sm text-gray-600">Comprehensive coverage options</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center p-3 bg-orange-50 rounded-lg">
+                            <div class="insurance-icon">
+                                <i class="fas fa-heart text-orange-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Blue Cross Blue Shield</h4>
+                                <p class="text-sm text-gray-600">Health insurance specialists</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center p-3 bg-orange-50 rounded-lg">
+                            <div class="insurance-icon">
+                                <i class="fas fa-hand-holding-heart text-orange-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Northwestern Mutual</h4>
+                                <p class="text-sm text-gray-600">Life insurance and financial planning</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- FAQ Section -->
                 <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
-                    <h3 class="text-xl font-bold text-orange-600 mb-3">Savings FAQs</h3>
-                    <p class="text-gray-700 mb-3">Common questions about saving money effectively.</p>
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Insurance FAQs</h3>
+                    <p class="text-gray-700 mb-3">Get answers to common questions about insurance coverage.</p>
                     <div class="expandable-content" id="faq-content">
                         <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">Q: How much should I have in my emergency fund?</h4>
-                            <p class="text-sm">A: Most financial experts recommend 3-6 months of essential living
-                                expenses. If you have variable income or work in an unstable industry, aim for 6-12
-                                months of expenses.</p>
+                            <h4 class="font-bold mb-2">Q: How much life insurance do I need?</h4>
+                            <p class="text-sm">A: A common rule of thumb is 10-12 times your annual income, but it
+                                depends on your debts, number of dependents, and future obligations like college
+                                tuition.</p>
                         </div>
                         <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">Q: Should I pay off debt or save first?</h4>
-                            <p class="text-sm">A: It's generally recommended to build a small emergency fund
-                                ($1,000-2,000) first, then focus on high-interest debt, then build a full emergency
-                                fund, and finally save for other goals while paying down lower-interest debt.</p>
+                            <h4 class="font-bold mb-2">Q: What's the difference between HMO and PPO health plans?</h4>
+                            <p class="text-sm">A: HMOs typically have lower premiums but require you to use doctors in
+                                their network and get referrals for specialists. PPOs offer more flexibility to see
+                                out-of-network providers but at a higher cost.</p>
                         </div>
                         <div class="bg-orange-50 p-3 rounded-lg mb-3">
-                            <h4 class="font-bold mb-2">Q: Where should I keep my emergency fund?</h4>
-                            <p class="text-sm">A: Keep emergency savings in a separate, easily accessible account like a
-                                high-yield savings account. The goal is preservation and access, not growth, so avoid
-                                investing emergency funds in the stock market.</p>
+                            <h4 class="font-bold mb-2">Q: Should I choose a high-deductible health plan?</h4>
+                            <p class="text-sm">A: HDHPs have lower premiums but higher deductibles. They can be a good
+                                choice if you're generally healthy and want to save on premiums, especially when paired
+                                with a Health Savings Account (HSA) for tax advantages.</p>
                         </div>
                         <div class="bg-orange-50 p-3 rounded-lg">
-                            <h4 class="font-bold mb-2">Q: How can I make saving money easier?</h4>
-                            <p class="text-sm">A: Automate your savings by setting up direct transfers from checking to
-                                savings on payday. Also, consider apps that round up purchases and save the difference,
-                                and always "pay yourself first" before spending on discretionary items.</p>
+                            <h4 class="font-bold mb-2">Q: How can I lower my auto insurance premiums?</h4>
+                            <p class="text-sm">A: You can lower premiums by maintaining a clean driving record, bundling
+                                with other policies, increasing deductibles, taking advantage of discounts (safe driver,
+                                good student, etc.), and driving a vehicle with safety features.</p>
                         </div>
                     </div>
                     <button
@@ -543,10 +596,50 @@
                     </button>
                 </div>
 
+                <!-- Contact Information -->
+                <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
+                    <h3 class="text-xl font-bold text-orange-600 mb-3">Insurance Experts Ready to Help</h3>
+                    <p class="text-gray-700 mb-3">Our licensed insurance advisors can answer your questions and help you
+                        find the right coverage.</p>
+
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <div class="bg-orange-100 p-3 rounded-full mr-3">
+                                <i class="fas fa-phone text-orange-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Call Us</p>
+                                <p class="text-orange-600">1-800-INS-PRO</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="bg-orange-100 p-3 rounded-full mr-3">
+                                <i class="fas fa-envelope text-orange-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Email Us</p>
+                                <p class="text-orange-600">insurance@finsmart.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="bg-orange-100 p-3 rounded-full mr-3">
+                                <i class="fas fa-clock text-orange-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">Hours</p>
+                                <p>Mon-Fri: 8am-8pm EST</p>
+                                <p>Sat: 9am-4pm EST</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Motivational closing line -->
                 <div class="text-center py-6">
-                    <p class="text-orange-600 font-semibold italic">Small consistent savings grow into significant
-                        wealth - start today and watch your financial security multiply!</p>
+                    <p class="text-orange-600 font-semibold italic">Don't wait until it's too late - protect your
+                        tomorrow today with the right insurance coverage!</p>
                 </div>
             </main>
         </div>
@@ -577,64 +670,53 @@
             }
         }
 
-        // Savings Calculator Functionality
-        function calculateSavings() {
-            const initialAmount = parseFloat(document.getElementById('initial-amount').value);
-            const monthlyContribution = parseFloat(document.getElementById('monthly-contribution').value);
-            const interestRate = parseFloat(document.getElementById('interest-rate').value) / 100 / 12; // Monthly interest rate
-            const timePeriod = parseFloat(document.getElementById('time-period').value) * 12; // Months
+        // Insurance Calculator Functionality
+        function calculateCoverage() {
+            const annualIncome = parseFloat(document.getElementById('annual-income').value);
+            const dependents = parseFloat(document.getElementById('dependents').value);
+            const debts = parseFloat(document.getElementById('debts').value);
 
-            // Calculate future value
-            let futureValue = initialAmount;
-            for (let i = 0; i < timePeriod; i++) {
-                futureValue = futureValue * (1 + interestRate) + monthlyContribution;
-            }
-
-            // Calculate totals
-            const totalContributions = initialAmount + (monthlyContribution * timePeriod);
-            const interestEarned = futureValue - totalContributions;
+            // Calculate recommended coverage (10x income + debts + 50k per dependent)
+            const coverage = (annualIncome * 10) + debts + (dependents * 50000);
 
             // Update display
-            document.getElementById('future-value').textContent = '$' + futureValue.toFixed(2);
-            document.getElementById('total-contributions').textContent = '$' + totalContributions.toFixed(2);
-            document.getElementById('interest-earned').textContent = '$' + interestEarned.toFixed(2);
+            document.getElementById('coverage-amount').textContent = '$' + coverage.toLocaleString();
         }
 
         // Initialize calculator and event listeners
         document.addEventListener('DOMContentLoaded', function () {
             // Format initial values
-            document.getElementById('initial-value').textContent = Number(5000).toLocaleString();
-            document.getElementById('monthly-value').textContent = Number(200).toLocaleString();
-            document.getElementById('rate-value').textContent = '2.5';
-            document.getElementById('time-value').textContent = '10';
+            document.getElementById('income-value').textContent = Number(75000).toLocaleString();
+            document.getElementById('dependents-value').textContent = '2';
+            document.getElementById('debts-value').textContent = Number(50000).toLocaleString();
 
             // Calculate initial values
-            calculateSavings();
+            calculateCoverage();
 
             // Add event listeners to sliders
-            document.getElementById('initial-amount').addEventListener('input', function () {
-                document.getElementById('initial-value').textContent = Number(this.value).toLocaleString();
-                calculateSavings();
+            document.getElementById('annual-income').addEventListener('input', function () {
+                document.getElementById('income-value').textContent = Number(this.value).toLocaleString();
+                calculateCoverage();
             });
 
-            document.getElementById('monthly-contribution').addEventListener('input', function () {
-                document.getElementById('monthly-value').textContent = Number(this.value).toLocaleString();
-                calculateSavings();
+            document.getElementById('dependents').addEventListener('input', function () {
+                document.getElementById('dependents-value').textContent = this.value;
+                calculateCoverage();
             });
 
-            document.getElementById('interest-rate').addEventListener('input', function () {
-                document.getElementById('rate-value').textContent = this.value;
-                calculateSavings();
+            document.getElementById('debts').addEventListener('input', function () {
+                document.getElementById('debts-value').textContent = Number(this.value).toLocaleString();
+                calculateCoverage();
             });
 
-            document.getElementById('time-period').addEventListener('input', function () {
-                document.getElementById('time-value').textContent = this.value;
-                calculateSavings();
+            // Form submission
+            document.querySelector('form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                alert('Thank you for your request! Our insurance partners will contact you with quotes shortly.');
+                this.reset();
             });
         });
     </script>
-
-
 
 
     <!-- ads  -->
@@ -729,6 +811,7 @@
             });
         })();
     </script>
+
 
 
 </body>
