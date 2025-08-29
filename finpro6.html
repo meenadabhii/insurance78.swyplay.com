@@ -50,7 +50,7 @@
 
                     // Define anchor ad with proper ID
                     anchorSlot = googletag.defineOutOfPageSlot(
-                        '/23293093930/native',
+                        '/23293093930/anchor',
                         googletag.enums.OutOfPageFormat.BOTTOM_ANCHOR
                     );
 
@@ -313,7 +313,10 @@
                 <h2 class="text-xl font-bold">Financial Professionals</h2>
             </header>
 
-            <!-- Header Section -->
+  <!-- ads -->
+            <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                <div id="ad-slot-1" class="ad-container" style="display: block !important;"></div>
+            </div>
 
             <!-- Header Section -->
             <div
@@ -359,11 +362,7 @@
                 </div>
             </div>
 
-            <!-- ads -->
-            <div id="banner-ad" class="ads-box" style="min-height: 250px;">
-                <div id="ad-slot-1" class="ad-container" style="display: block !important;"></div>
-            </div>
-
+          
             <main class="p-5">
                 <!-- International Banking Card -->
                 <div id="international-banking" class="finance-card bg-white border border-orange-200 p-5 mb-5">
@@ -409,6 +408,10 @@
                         onclick="toggleExpand('banking-content')">
                         Learn More
                     </button>
+                </div>
+   <!-- ads -->
+                <div id="banner-ad" class="ads-box" style="min-height: 250px;">
+                    <div id="ad-slot-2" class="ad-container" style="display: block !important;"></div>
                 </div>
 
                 <!-- Trading & Markets Card -->
@@ -516,11 +519,7 @@
                     </button>
                 </div>
 
-                <!-- ads -->
-                <div id="banner-ad" class="ads-box" style="min-height: 250px;">
-                    <div id="ad-slot-2" class="ad-container" style="display: block !important;"></div>
-                </div>
-
+             
                 <!-- Global Economy Card -->
                 <div class="finance-card bg-white border border-orange-200 p-5 mb-5">
                     <h3 class="text-xl font-bold text-orange-600 mb-3">Global Economic Indicators</h3>
